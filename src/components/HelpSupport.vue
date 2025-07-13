@@ -216,7 +216,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-// FAQ Data
+
 const tabs = ['General', 'Room Allocation', 'Fee Payments', 'Mess & Meals', 'Complaints']
 const currentTab = ref('General')
 const activeQuestion = ref(null)
