@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "announcement-project",
   "version": "1.0.0",
   "scripts": {
@@ -8,20 +7,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.4.15"
+    "marked": "^16.0.0",
+    "vue": "^3.4.15",
+    "vue-router": "^4.5.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^6.0.0",
     "vite": "^5.2.0"
   }
 }
-=======
-  "dependencies": {
-  "vue": "^3.4.0",
-  "vue-router": "^4.2.0"
-  
-}
-}
-
-
->>>>>>> a24ab4799af62c5f2c7cc81ce370f0350129a948
