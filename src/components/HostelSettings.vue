@@ -2,158 +2,156 @@
   <div class="hostel-configurator">
     <header>
       <h1>Hostel Settings</h1>
-      
     </header>
 
     <div class="settings-container">
-      
-      <section class="settings-section">
-        <div class="section-header">
-          <!-- <img src="@/public/leaveimg1.jpg" alt="Leave and timings illustration" class="section-image"> -->
-          <h2>Leave and Timings</h2>
-        </div>
-        <p>Set rules for student leave requests and hostel timings.</p>
+      <div class="settings-row">
         
-        <div class="settings-grid">
-          <div class="setting-item">
-            <label>Default Leave Duration (days/month)</label>
-            <input type="number" v-model="leaveSettings.maxDays" min="1" max="31">
+        <section class="settings-section">
+          <div class="section-header">
+            <h2>Leave and Timings</h2>
           </div>
+          <p>Set rules for student leave requests and hostel timings.</p>
           
-          <div class="setting-item">
-            <label>Leave Approval Cut-off Time</label>
-            <input type="time" v-model="leaveSettings.cutoffTime">
+          <div class="settings-grid">
+            <div class="setting-item">
+              <label>Default Leave Duration (days/month)</label>
+              <input type="number" v-model="leaveSettings.maxDays" min="1" max="31">
+            </div>
+            
+            <div class="setting-item">
+              <label>Leave Approval Cut-off Time</label>
+              <input type="time" v-model="leaveSettings.cutoffTime">
+            </div>
+            
+            <div class="setting-item toggle-group">
+              <label>Late Entry Alerts</label>
+              <label class="toggle-switch">
+                <input type="checkbox" v-model="leaveSettings.lateAlertsEnabled">
+                <span class="slider"></span>
+              </label>
+            </div>
+            
+            <div class="setting-item" v-if="leaveSettings.lateAlertsEnabled">
+              <label>Grace Period (minutes)</label>
+              <input type="number" v-model="leaveSettings.gracePeriod" min="0" max="120">
+            </div>
           </div>
-          
-          <div class="setting-item toggle-group">
-            <label>Late Entry Alerts</label>
-            <label class="toggle-switch">
-              <input type="checkbox" v-model="leaveSettings.lateAlertsEnabled">
-              <span class="slider"></span>
-            </label>
-          </div>
-          
-          <div class="setting-item" v-if="leaveSettings.lateAlertsEnabled">
-            <label>Grace Period (minutes)</label>
-            <input type="number" v-model="leaveSettings.gracePeriod" min="0" max="120">
-          </div>
-        </div>
-      </section>
+        </section>
 
-     
-      <section class="settings-section">
-        <div class="section-header">
-          <!-- <img src="@/assets/room-allocation.jpg" alt="Room allocation illustration" class="section-image"> -->
-          <h2>Room Allocation</h2>
-        </div>
-        <p>Configure how rooms are assigned to students.</p>
         
-        <div class="settings-grid">
-          <div class="setting-item">
-            <label>Allocation Method</label>
-            <select v-model="roomSettings.allocationMethod">
-              <option value="auto">Automatic</option>
-              <option value="manual">Manual</option>
-              <option value="hybrid">Hybrid</option>
-            </select>
+        <section class="settings-section">
+          <div class="section-header">
+            <h2>Room Allocation</h2>
           </div>
+          <p>Configure how rooms are assigned to students.</p>
           
-          <div class="setting-item toggle-group">
-            <label>Allow Room Change Requests</label>
-            <label class="toggle-switch">
-              <input type="checkbox" v-model="roomSettings.allowChanges">
-              <span class="slider"></span>
-            </label>
+          <div class="settings-grid">
+            <div class="setting-item">
+              <label>Allocation Method</label>
+              <select v-model="roomSettings.allocationMethod">
+                <option value="auto">Automatic</option>
+                <option value="manual">Manual</option>
+                <option value="hybrid">Hybrid</option>
+              </select>
+            </div>
+            
+            <div class="setting-item toggle-group">
+              <label>Allow Room Change Requests</label>
+              <label class="toggle-switch">
+                <input type="checkbox" v-model="roomSettings.allowChanges">
+                <span class="slider"></span>
+              </label>
+            </div>
+            
+            <div class="setting-item toggle-group">
+              <label>Enable Waitlist for Full Rooms</label>
+              <label class="toggle-switch">
+                <input type="checkbox" v-model="roomSettings.enableWaitlist">
+                <span class="slider"></span>
+              </label>
+            </div>
           </div>
-          
-          <div class="setting-item toggle-group">
-            <label>Enable Waitlist for Full Rooms</label>
-            <label class="toggle-switch">
-              <input type="checkbox" v-model="roomSettings.enableWaitlist">
-              <span class="slider"></span>
-            </label>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      
-      <section class="settings-section">
-        <div class="section-header">
-          <!-- <img src="@/assets/quiet-hours.jpg" alt="Quiet hours illustration" class="section-image"> -->
-          <h2>Quiet Hours</h2>
-        </div>
-        <p>Define periods for silence in common areas and floors.</p>
-        
-        <div class="settings-grid">
-          <div class="setting-item">
-            <label>Start Time</label>
-            <input type="time" v-model="quietHours.startTime">
+      <div class="settings-row">
+       
+        <section class="settings-section">
+          <div class="section-header">
+            <h2>Quiet Hours</h2>
           </div>
+          <p>Define periods for silence in common areas and floors.</p>
           
-          <div class="setting-item">
-            <label>End Time</label>
-            <input type="time" v-model="quietHours.endTime">
+          <div class="settings-grid">
+            <div class="setting-item">
+              <label>Start Time</label>
+              <input type="time" v-model="quietHours.startTime">
+            </div>
+            
+            <div class="setting-item">
+              <label>End Time</label>
+              <input type="time" v-model="quietHours.endTime">
+            </div>
+            
+            <div class="setting-item toggle-group">
+              <label>Enforce on Weekends</label>
+              <label class="toggle-switch">
+                <input type="checkbox" v-model="quietHours.enforceWeekends">
+                <span class="slider"></span>
+              </label>
+            </div>
+            
+            <div class="setting-item toggle-group">
+              <label>Special Hours During Exams</label>
+              <label class="toggle-switch">
+                <input type="checkbox" v-model="quietHours.examHours">
+                <span class="slider"></span>
+              </label>
+            </div>
           </div>
-          
-          <div class="setting-item toggle-group">
-            <label>Enforce on Weekends</label>
-            <label class="toggle-switch">
-              <input type="checkbox" v-model="quietHours.enforceWeekends">
-              <span class="slider"></span>
-            </label>
-          </div>
-          
-          <div class="setting-item toggle-group">
-            <label>Special Hours During Exams</label>
-            <label class="toggle-switch">
-              <input type="checkbox" v-model="quietHours.examHours">
-              <span class="slider"></span>
-            </label>
-          </div>
-        </div>
-      </section>
+        </section>
 
-     
-      <section class="settings-section">
-        <div class="section-header">
-          <!-- <img src="@/assets/policies.jpg" alt="Policies illustration" class="section-image"> -->
-          <h2>Policies Editor</h2>
-        </div>
-        <p>Update and publish hostel rules and regulations.</p>
         
-        <div class="current-policies">
-          <h3>Current Policies</h3>
-          <ul>
-            <li>No guests allowed after 10 PM.</li>
-            <li>Maintain cleanliness in common areas.</li>
-            <li>Ragging is strictly prohibited.</li>
-          </ul>
-        </div>
-        
-        <div class="settings-grid">
-          <div class="setting-item toggle-group">
-            <label>Enable Biometric Access</label>
-            <label class="toggle-switch">
-              <input type="checkbox" v-model="securitySettings.biometricAccess">
-              <span class="slider"></span>
-            </label>
+        <section class="settings-section">
+          <div class="section-header">
+            <h2>Policies Editor</h2>
+          </div>
+          <p>Update and publish hostel rules and regulations.</p>
+          
+          <div class="current-policies">
+            <h3>Current Policies</h3>
+            <ul>
+              <li>No guests allowed after 10 PM.</li>
+              <li>Maintain cleanliness in common areas.</li>
+              <li>Ragging is strictly prohibited.</li>
+            </ul>
           </div>
           
-          <div class="setting-item toggle-group">
-            <label>24/7 CCTV Monitoring</label>
-            <label class="toggle-switch">
-              <input type="checkbox" v-model="securitySettings.cctvMonitoring">
-              <span class="slider"></span>
-            </label>
+          <div class="settings-grid">
+            <div class="setting-item toggle-group">
+              <label>Enable Biometric Access</label>
+              <label class="toggle-switch">
+                <input type="checkbox" v-model="securitySettings.biometricAccess">
+                <span class="slider"></span>
+              </label>
+            </div>
+            
+            <div class="setting-item toggle-group">
+              <label>24/7 CCTV Monitoring</label>
+              <label class="toggle-switch">
+                <input type="checkbox" v-model="securitySettings.cctvMonitoring">
+                <span class="slider"></span>
+              </label>
+            </div>
+            
+            <div class="setting-item">
+              <label>Emergency Contact Number</label>
+              <input type="tel" v-model="securitySettings.emergencyContact">
+            </div>
           </div>
-          
-          <div class="setting-item">
-            <label>Emergency Contact Number</label>
-            <input type="tel" v-model="securitySettings.emergencyContact">
-          </div>
-        </div>
-      </section>
-
+        </section>
+      </div>
       
       <div class="action-buttons">
         <button @click="saveSettings" class="save-btn">Save All Settings</button>
@@ -239,7 +237,7 @@ export default {
 
 <style scoped>
 .hostel-configurator {
-  max-width: 700px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 2rem;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -248,6 +246,20 @@ export default {
 header {
   margin-bottom: 2rem;
   text-align: center;
+}
+.settings-row {
+  display: flex;
+  gap: 2rem;
+}
+
+.settings-row > .settings-section {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .settings-row {
+    flex-direction: column;
+  }
 }
 
 h1 {
