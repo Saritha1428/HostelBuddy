@@ -1,6 +1,6 @@
 <template>
   <div class="complaint-status">
-    <!-- <Navbar /> -->
+    <Navbar_warden />
     <main>
       <div class="container">
         <!-- Header -->
@@ -63,13 +63,14 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+
 import Footer from '@/components/Footer.vue'
 import StatusTimeline from './StatusTimeline.vue'
+import Navbar_warden from '../../../components/Navbar_warden.vue'
 
 export default {
   name: 'ComplaintStatus',
-  components: { Navbar, Footer, StatusTimeline },
+  components: { Navbar_warden, Footer, StatusTimeline },
   data() {
     return {
       complaint: {

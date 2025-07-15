@@ -1,4 +1,5 @@
 <template>
+  <Navbar_Student/>
   <div class="meal-cancellation-container">
     <h1>Meal Cancellation</h1>
     
@@ -185,11 +186,18 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_Student from '../../../../components/Navbar_Student.vue'
+import Footer from '../../../../components/Footer.vue'
+
 export default {
   name: 'MealCancellation',
+  components: {
+    Navbar_Student,Footer
+  },
   data() {
     return {
       today: new Date().toISOString().split('T')[0],

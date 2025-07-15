@@ -1,4 +1,5 @@
 <template>
+  <Navbar_Student/>
   <div class="mess-menu-container">
     <h1>Mess Menu</h1>
     
@@ -102,11 +103,19 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_Student from '../../../../components/Navbar_Student.vue'
+import Footer from '../../../../components/Footer.vue'
+
 export default {
   name: 'MessMenu',
+  components: {
+    Navbar_Student,
+    Footer
+  },
   data() {
     return {
       timePeriod: 'week', // 'week' or 'day'
@@ -261,12 +270,15 @@ export default {
 
 <style scoped>
 .mess-menu-container {
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 30px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  width:1000px;
 }
+/* h3{
+  text-align: center;
+  
+} */
 
 h1 {
   color: #1BBC9B;
@@ -317,7 +329,7 @@ h1 {
   font-weight: 600;
   color: #333;
   min-width: 200px;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .nav-btn {
@@ -340,13 +352,12 @@ h1 {
   transform: scale(1.1);
 }
 
-/* Weekly View Styles */
 .weekly-menu {
-  display: flex;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  flex: 2;
-  width:1000px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .day-card {
@@ -355,7 +366,7 @@ h1 {
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   padding: 20px;
   transition: all 0.3s;
-  width :1000px;
+  width: 100%;
 }
 
 .day-card.today {
@@ -382,6 +393,7 @@ h1 {
 
 .meal-section {
   margin-bottom: 15px;
+  padding-left: 40px;
 }
 
 .meal-section h3 {
@@ -465,6 +477,34 @@ h1 {
   font-size: 15px;
 }
 
+@media (max-width: 992px) {
+  .weekly-menu {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1200px) {
+  .weekly-menu {
+    grid-template-columns: repeat(3, minmax(350px, 1fr));
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 992px) {
+  .weekly-menu {
+    grid-template-columns: repeat(3, minmax(300px, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  .weekly-menu {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+  .weekly-menu {
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   .mess-menu-container {
     padding: 20px;
@@ -481,6 +521,14 @@ h1 {
   
   .weekly-menu {
     grid-template-columns: 1fr;
+  }
+  
+  .day-card {
+    padding: 15px;
+  }
+  
+  .daily-menu {
+    padding: 20px;
   }
 }
 </style>

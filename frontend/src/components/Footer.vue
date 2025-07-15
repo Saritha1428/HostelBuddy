@@ -11,8 +11,8 @@
         <ul>
           <li><router-link to="/hostel-buddy">Home</router-link></li>
           <li><router-link to="/hostel-buddy/rooms">Rooms</router-link></li>
-          <!-- <li><router-link to="/hostel-buddy/about">About</router-link></li>
-          <li><router-link to="/hostel-buddy/contact">Contact</router-link></li> -->
+          <li><router-link to="/hostel-buddy/about">About</router-link></li>
+          <li><router-link to="/hostel-buddy/contact">Contact</router-link></li>
         </ul>
       </div>
 

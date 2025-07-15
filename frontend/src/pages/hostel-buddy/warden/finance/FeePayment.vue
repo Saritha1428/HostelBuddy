@@ -1,6 +1,6 @@
 <template>
   <div class="fee-payment-page">
-    <Navbar />
+    <Navbar_warden />
     <main>
       <div class="payment-container">
         <!-- Payment Header -->
@@ -201,13 +201,14 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+
 import Footer from '@/components/Footer.vue'
+import Navbar_warden from '../../../../components/Navbar_warden.vue'
 
 export default {
   name: 'FeePayment',
   components: {
-    Navbar,
+    Navbar_warden,
     Footer
   },
   data() {

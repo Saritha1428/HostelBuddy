@@ -1,6 +1,6 @@
 <template>
   <div class="admin-profile">
-    <!-- <Navbar /> -->
+    <Navbar_warden />
     <main>
       <div class="profile-container">
         <!-- Profile Header -->
@@ -149,13 +149,14 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+
 import Footer from '@/components/Footer.vue'
+import Navbar_warden from '../../../components/Navbar_warden.vue'
 
 export default {
   name: 'AdminProfile',
   components: {
-    Navbar,
+    Navbar_warden,
     Footer
   },
   data() {

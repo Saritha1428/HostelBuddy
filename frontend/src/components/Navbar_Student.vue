@@ -16,14 +16,9 @@
           <router-link to="/hostel-buddy" class="nav-links">Home</router-link>
         </li>
          <li class="nav-item">
-          <router-link to="/about" class="nav-links">About Us</router-link>
+          <router-link to="/student-dashboard" class="nav-links">Dashboard</router-link>
         </li> 
-         <li class="nav-item">
-          <router-link to="/contact" class="nav-links">Contact Us</router-link>
-        </li>
-     <li class="nav-item">
-          <router-link to="/help" class="nav-links">Queries</router-link>
-        </li>
+        
       </ul>
     </div>
   </nav>

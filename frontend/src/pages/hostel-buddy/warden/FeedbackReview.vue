@@ -1,4 +1,5 @@
 <template>
+  <Navbar_warden/>
   <div class="feedback-review-container">
     <!-- Title with border bottom color #1BBC9B -->
     <div class="page-header">
@@ -56,11 +57,19 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_warden from '../../../components/Navbar_warden.vue';
+import Footer from '../../../components/Footer.vue';
+
 export default {
   name: 'FeedbackReview',
+  components: {
+    Navbar_warden,
+    Footer
+  },
   data() {
     return {
       searchQuery: '',

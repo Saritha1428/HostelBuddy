@@ -1,4 +1,5 @@
 <template>
+  <Navbar_Student/>
   <div class="profile-container">
   
 
@@ -58,11 +59,18 @@
     </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_Student from '../../../../components/Navbar_Student.vue';
+import Footer from '../../../../components/Footer.vue';
+
 export default {
-  name: 'StudentProfile',
+  name: 'StudentProfile',components:{
+    Navbar_Student,
+    Footer
+  },
   data() {
     return {
       editMode: false,
@@ -117,6 +125,7 @@ export default {
 /* Back Button */
 .back-nav {
   margin-bottom: 30px;
+  text-align: center;
 }
 
 .back-link {

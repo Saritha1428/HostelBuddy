@@ -107,6 +107,14 @@
         </div>
 
         <!-- Third Row -->
+         
+        <div class="quick-access-card" @click="navigateToHostelOccupancy">
+          <h3>Hostel Occupancy</h3>
+          <p>Which room are available</p>
+          <button class="access-btn">
+            Check<i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
         <div class="quick-access-card" @click="navigateToRoomAllocation">
           <h3>Room Allocation</h3>
           <p>Manage student room assignments</p>
@@ -147,12 +155,11 @@
 
 <script>
 import Footer from '@/components/Footer.vue'
-import HostelOccupancy from './HostelOccupancy.vue'
 
 export default {
   name: 'WardenDashboard',
   components: {
-    Footer,HostelOccupancy
+    Footer
   },
   data() {
     return {
@@ -226,6 +233,9 @@ export default {
     },
     showQuickComplaintView() {
       this.$router.push('/complaint-management')
+    },
+    navigateToHostelOccupancy(){
+      this.$router.push('/hostel-occupancy')
     },
     showFeeReports() {
       this.$router.push('/payment-tracking')

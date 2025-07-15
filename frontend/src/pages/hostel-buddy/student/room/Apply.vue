@@ -1,4 +1,5 @@
 <template>
+  <Navbar_Student/>
   <div class="room-application-container">
    
 
@@ -67,11 +68,18 @@
     </form>
      
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_Student from '../../../../components/Navbar_Student.vue'
+import Footer from '../../../../components/Footer.vue'
+
 export default {
-  name: 'RoomApplication',
+  name: 'RoomApplication',components: {
+    Navbar_Student,
+    Footer
+  },
   data() {
     return {
       form: {

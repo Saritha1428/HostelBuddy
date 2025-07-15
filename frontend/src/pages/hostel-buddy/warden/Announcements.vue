@@ -1,6 +1,6 @@
 <template>
   <div class="announcements-page">
-    <!-- <Navbar /> -->
+    <Navbar_warden />
     <main>
       <section class="announcements-header">
         <div class="header-top">
@@ -71,13 +71,14 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+
 import Footer from '@/components/Footer.vue'
+import Navbar_warden from '../../../components/Navbar_warden.vue'
 
 export default {
   name: 'Announcements',
   components: {
-    Navbar,
+    Navbar_warden,
     Footer
   },
   data() {

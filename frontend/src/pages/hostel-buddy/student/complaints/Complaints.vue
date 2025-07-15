@@ -1,5 +1,8 @@
 <template>
+    <Navbar_Student/>
   <div class="request-container">
+  
+
     <div class="cards-wrapper">
       <!-- Left Card - Complaint Form -->
       <div class="form-card">
@@ -79,11 +82,18 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_Student from '../../../../components/Navbar_Student.vue';
+import Footer from '../../../../components/Footer.vue';
+
 export default {
   name: 'ComplaintSystem',
+    components: {
+    Footer,Navbar_Student
+  },
   data() {
     return {
       complaintType: '',

@@ -1,4 +1,5 @@
 <template>
+  <Navbar_warden/>
   <div class="dashboard">
     <h1>Announcement Dashboard</h1>
 
@@ -88,13 +89,16 @@
       <div class="posted-time"> Posted Immediately</div>
     </div>
   </div>
-</div>
-
   </div>
+</div>
+<Footer/>
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+import Navbar_warden from '../../../components/Navbar_warden.vue'
+import Footer from '../../../components/Footer.vue'
+
 
 const title = ref('')
 const description = ref('')

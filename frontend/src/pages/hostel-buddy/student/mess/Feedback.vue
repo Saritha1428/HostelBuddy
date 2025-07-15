@@ -1,4 +1,5 @@
 <template>
+  <Navbar_Student/>
   <div class="feedback-container">
     <div class="cards-wrapper">
       <!-- Left Card - Feedback Form -->
@@ -142,6 +143,7 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
@@ -152,9 +154,15 @@ import food3 from '@/assets/images/food3.jpeg';
 import food4 from '@/assets/images/food4.jpeg';
 import food5 from '@/assets/images/food5.jpeg';
 import food6 from '@/assets/images/food6.jpg';
+import Navbar_Student from '../../../../components/Navbar_Student.vue';
+import Footer from '../../../../components/Footer.vue';
 
 export default {
   name: 'MessFeedback',
+  components: {
+    Navbar_Student,
+    Footer
+  },
   data() {
     return {
       today: new Date().toISOString().split('T')[0],

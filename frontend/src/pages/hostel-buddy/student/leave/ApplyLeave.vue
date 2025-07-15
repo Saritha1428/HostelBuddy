@@ -1,4 +1,5 @@
 <template>
+    <Navbar_Student/>
   <div class="leave-application-container">
     <div class="cards-wrapper">
       <!-- Left Card - Application Form -->
@@ -88,11 +89,17 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_Student from '../../../../components/Navbar_Student.vue';
+import Footer from '../../../../components/Footer.vue';
 export default {
   name: 'LeaveApplication',
+  components:{
+    Navbar_Student,Footer
+  },
   data() {
     return {
       today: new Date().toISOString().split('T')[0],

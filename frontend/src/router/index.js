@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HostelBuddy from '@/pages/hostel-buddy/HostelBuddy.vue'
+import AboutUs from  '@/pages/hostel-buddy/AboutUs.vue'
+import ContactUs from '@/pages/hostel-buddy/ContactUs.vue'
 import Login from '@/pages/auth/Login.vue'
 import Register from '@/pages/auth/Register.vue'
 import ForgotPassword from '@/pages/auth/ForgotPassword.vue'
@@ -53,16 +55,16 @@ const routes = [
     redirect: '/hostel-buddy'
   },
 
-  // {
-  //   path: '/about',
-  //   Name :'AboutUs',
-  //   Component:AboutUs
-  // },
-  // {
-  //   path: '/contact',
-  //   Name: 'ContactUs',
-  //   Component:ContactUs
-  // },
+  {
+    path: '/about',
+    name :'AboutUs',
+    component:AboutUs
+  },
+  {
+    path: '/contact',
+    name: 'ContactUs',
+    component:ContactUs
+  },
   {
     path: '/login',
     name: 'Login',

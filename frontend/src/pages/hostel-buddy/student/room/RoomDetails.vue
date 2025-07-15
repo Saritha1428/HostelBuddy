@@ -1,4 +1,5 @@
 <template>
+  <Navbar_Student/>
   <div class="room-details-container">
     <!-- Left side - Student Room Details -->
     <div class="student-info">
@@ -57,11 +58,19 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_Student from '../../../../components/Navbar_Student.vue';
+import Footer from '../../../../components/Footer.vue';
+
 export default {
   name: 'RoomDetails',
+  components: {
+    Navbar_Student,
+    Footer
+  },
   data() {
     return {
       roommates: [
