@@ -2,7 +2,7 @@
   <div class="feedback-review-container">
     <!-- Title with border bottom color #1BBC9B -->
     <div class="page-header">
-      <h1>Feedback Review</h1>
+      <h1>Hostel Feedback</h1>
     </div>
 
     <!-- Search bar -->
@@ -50,7 +50,7 @@
       <!-- Image on right -->
       <div class="image-container">
         <img 
-          src="../assets/feedback.jpg" 
+          src="@/assets/images/feedback.jpg" 
           alt="Feedback illustration" 
           class="content-image">
       </div>
@@ -192,15 +192,17 @@ export default {
   position: sticky;
    margin-top: 0;
   align-self: flex-start;
+ 
 }
 
 .content-image {
-  width: 100%;
+  width: 600px;
   max-width: 880px;
-  height:500px;
+  height:400px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   margin-top: 0;
+
 }
 
 .feedback-item {

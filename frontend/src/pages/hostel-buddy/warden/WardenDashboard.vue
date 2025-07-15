@@ -1,41 +1,23 @@
 <template>
   <div class="warden-dashboard">
-    <!-- <Navbar /> -->
     <main>
       <!-- Dashboard Header -->
       <div class="dashboard-header">
         <h1>Warden Dashboard</h1>
-        <div class="header-right">
-          <div class="quick-actions">
-            <router-link to="/announcements" class="action-btn" style="text-decoration: none;">
-              <i class="fas fa-bullhorn"></i>Announcements
+        <!-- Profile Dropdown only in top-right -->
+        <div class="profile-dropdown">
+          <button class="profile-btn" @click="toggleProfileDropdown">
+            <i class="fas fa-user-circle"></i>
+            <span>Warden</span>
+            <i class="fas fa-caret-down"></i>
+          </button>
+          <div v-if="showDropdown" class="dropdown-content">
+            <router-link to="/admin-profile" @click="showDropdown = false">
+              <i class="fas fa-user"></i> My Profile
             </router-link>
-             <router-link to="/fees" class="action-btn" style="text-decoration: none;">
-              <i class="fas fa-bullhorn"></i> Fee Structure
-            </router-link>
-            <button @click="showQuickComplaintView" class="action-btn">
-              <i class="fas fa-tools"></i> View Complaints
-            </button>
-            <button @click="showFeeReports" class="action-btn">
-              <i class="fas fa-rupee-sign"></i> Fee Reports
-            </button>
-          </div>
-
-          <!-- Profile Dropdown -->
-          <div class="profile-dropdown">
-            <button class="profile-btn" @click="toggleProfileDropdown">
-              <i class="fas fa-user-circle"></i>
-              <span>Warden</span>
-              <i class="fas fa-caret-down"></i>
-            </button>
-            <div v-if="showDropdown" class="dropdown-content">
-              <router-link to="/admin-profile" @click="showDropdown = false">
-                <i class="fas fa-user"></i> My Profile
-              </router-link>
-              <a href="#" @click.prevent="logout">
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </a>
-            </div>
+            <a href="#" @click.prevent="logout">
+              <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
           </div>
         </div>
       </div>
@@ -72,29 +54,88 @@
         </div>
       </div>
 
-      <!-- Quick Access Sections -->
+      <!-- Quick Access Sections - Moved all buttons here -->
       <div class="quick-access-grid">
+        <!-- First Row -->
+        <div class="quick-access-card" @click="$router.push('/announcements')">
+          <h3>Announcements</h3>
+          <p>Create and manage hostel announcements</p>
+          <button class="access-btn">
+            Manage <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="quick-access-card" @click="$router.push('/room-change')">
+          <h3>Change Rooms</h3>
+          <p>Manage student room assignments</p>
+          <button class="access-btn">
+            Manage <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="quick-access-card" @click="$router.push('/menu-update')">
+          <h3>Update Menu</h3>
+          <p>Update and manage mess menus</p>
+          <button class="access-btn">
+            Update <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Second Row -->
+        <div class="quick-access-card" @click="$router.push('/fee-management')">
+          <h3>Fee Management</h3>
+          <p>View and manage student fees</p>
+          <button class="access-btn">
+            View <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="quick-access-card" @click="showQuickComplaintView">
+          <h3>View Complaints</h3>
+          <p>Check and resolve student complaints</p>
+          <button class="access-btn">
+            View <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="quick-access-card" @click="showFeeReports">
+          <h3>Fee Reports</h3>
+          <p>Generate and view fee reports</p>
+          <button class="access-btn">
+            View <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Third Row -->
         <div class="quick-access-card" @click="navigateToRoomAllocation">
           <h3>Room Allocation</h3>
-          <p>Manage student room assignments and vacancies</p>
+          <p>Manage student room assignments</p>
           <button class="access-btn">
-            Go to Room Allocation <i class="fas fa-arrow-right"></i>
+            Allocate <i class="fas fa-arrow-right"></i>
           </button>
         </div>
 
         <div class="quick-access-card" @click="navigateToMessManagement">
-          <h3>Mess Management</h3>
-          <p>Update menus and view feedback</p>
+          <h3>Students Details</h3>
+          <p>Check the student status</p>
           <button class="access-btn">
-            Go to Mess <i class="fas fa-arrow-right"></i>
+            Manage <i class="fas fa-arrow-right"></i>
           </button>
         </div>
 
         <div class="quick-access-card" @click="navigateToStudentRecords">
           <h3>Leave Approval</h3>
-          <p>Students Leaves Details</p>
+          <p>Manage student leave requests</p>
           <button class="access-btn">
-            View Records <i class="fas fa-arrow-right"></i>
+            Approve <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="quick-access-card" @click="navigateToMessRules">
+          <h3>Edit Rules</h3>
+          <p>Update hostel rules and regulations</p>
+          <button class="access-btn">
+            Manage <i class="fas fa-arrow-right"></i>
           </button>
         </div>
       </div>
@@ -103,15 +144,14 @@
   </div>
 </template>
 
+
 <script>
-import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
 import HostelOccupancy from './HostelOccupancy.vue'
 
 export default {
   name: 'WardenDashboard',
   components: {
-    Navbar,
     Footer,HostelOccupancy
   },
   data() {
@@ -188,24 +228,23 @@ export default {
       this.$router.push('/complaint-management')
     },
     showFeeReports() {
-      this.$router.push('/fee-reports')
+      this.$router.push('/payment-tracking')
     },
     navigateToRoomAllocation() {
       this.$router.push('/room-assignment')
     },
     navigateToMessManagement() {
-      this.$router.push('/mess-management')
+      this.$router.push('/student-management')
     },
     navigateToStudentRecords() {
-      this.$router.push('/leave-approve')
+      this.$router.push('/leave-approval')
+    },
+    navigateToMessRules() {
+      this.$router.push('/rules')
     }
   }
 }
 </script>
-
-<style scoped>
-/* keep your entire CSS as-is from the version you already shared */
-</style>
 
 
 <style scoped>
@@ -555,6 +594,35 @@ export default {
   text-align: center;
 }
 
+/* .quick-access-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 0 1.5rem 1.5rem;
+} */
+
+/* Add this if you want the cards to be equal height */
+/* .quick-access-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.access-btn {
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .quick-access-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-access-grid {
+    grid-template-columns: 1fr;
+  }
+} */
 
 @media (max-width: 768px) {
   .dashboard-header {

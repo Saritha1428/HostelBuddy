@@ -59,12 +59,13 @@
       <div class="form-actions">
         <button type="submit" class="submit-btn">Submit Application</button>
       </div>
-    </form>
-     <div class="back-nav">
+      <div class="back-nav">
       <button @click="goBack" class="back-link">
-        ← Back to Dashboard
+      ← Back to Dashboard
       </button>
     </div>
+    </form>
+     
   </div>
 </template>
 
@@ -105,7 +106,10 @@ export default {
 }
 
 .back-nav {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  justify-content: center;
+  text-align: center;
 }
 
 .back-link {

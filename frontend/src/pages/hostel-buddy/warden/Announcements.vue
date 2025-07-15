@@ -8,7 +8,7 @@
             <h1>Announcements</h1>
             <p>Important notices from your hostel administration</p>
           </div>
-          <router-link to="/create-announcement" class="publish-btn">
+          <router-link to="/announcement-form" class="publish-btn">
             <i class="fas fa-plus-circle"></i> Publish Announcement
           </router-link>
         </div>

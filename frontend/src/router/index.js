@@ -20,6 +20,18 @@ import ComplaintStatus from '@/pages/hostel-buddy/warden/ComplaintStatus.vue'
 import FeePayment from '@/pages/hostel-buddy/warden/finance/FeePayment.vue'
 import HostelOccupancy from '@/pages/hostel-buddy/warden/HostelOccupancy.vue'
 import RoomAssignment from '@/pages/hostel-buddy/warden/RoomAssignment.vue'
+import ComplaintManagement from '@/pages/hostel-buddy/warden/ComplaintManagement.vue'
+import FeedbackReview from '@/pages/hostel-buddy/warden/FeedbackReview.vue'
+import FeeManagement from '../pages/hostel-buddy/warden/FeeManagement.vue'
+import LeaveApproval from '@/pages/hostel-buddy/warden/LeaveApproval.vue'
+import MenuUpdate from '@/pages/hostel-buddy/warden/MenuUpdate.vue'
+import PaymentTracking from '../pages/hostel-buddy/warden/PaymentTracking.vue'
+import RoomChange from '../pages/hostel-buddy/warden/RoomChange.vue'
+import AnnouncementForm from '../pages/hostel-buddy/warden/AnnouncementForm.vue'
+import NotFound from '../pages/shared/NotFound.vue'
+import Help from '../pages/shared/Help.vue'
+import Settings from '../pages/hostel-buddy/warden/Settings.vue'
+import StudentManagement from '../pages/hostel-buddy/warden/StudentManagement.vue'
 
 
 
@@ -40,6 +52,17 @@ const routes = [
     path: '/',
     redirect: '/hostel-buddy'
   },
+
+  // {
+  //   path: '/about',
+  //   Name :'AboutUs',
+  //   Component:AboutUs
+  // },
+  // {
+  //   path: '/contact',
+  //   Name: 'ContactUs',
+  //   Component:ContactUs
+  // },
   {
     path: '/login',
     name: 'Login',
@@ -149,9 +172,72 @@ const routes = [
     name: 'WardenDashboard',
     component: WardenDashboard,
     meta: { requiresAuth: true, role: 'warden' }
+  },
+    { 
+    path: '/complaint-management',
+    name: 'ComplaintManagement', 
+    component: ComplaintManagement
+  },
+   { 
+    path: '/feedback-review',
+    name: 'FeedbackReview',
+    component: FeedbackReview 
+  },
+  { 
+    path: '/fee-management',
+    name: 'FeeManagement',
+    component: FeeManagement 
+  },
+   { 
+    path: '/leave-approval',
+    name: 'LeaveApproval',
+    component: LeaveApproval 
+  },
+   { 
+    path: '/menu-update',
+    name: 'MenuUpdate',
+    component: MenuUpdate 
+  },
+  { 
+    path: '/payment-tracking',
+    name: 'PaymentTracking',
+    component: PaymentTracking
+  },
+  { 
+    path: '/room-change',
+    name: 'RoomChange', 
+    component: RoomChange 
   }
-
-  
+,
+  { 
+    path: '/announcement-form',
+    name: 'AnnouncementForm', 
+    component: AnnouncementForm 
+  }
+  ,
+  { 
+    path: '/error',
+    name: 'NotFound', 
+    component: NotFound
+  },
+  { 
+    path: '/help',
+    name: 'Help', 
+    component: Help
+  },
+  { 
+    path: '/rules',
+    name: 'Settings', 
+    component: Settings
+  }
+  ,
+  { 
+    path: '/student-management',
+    name: 'StudentManagement', 
+    component: StudentManagement
+  },
+  { path: '/:catchAll(.*)',
+     component: NotFound } 
 
 ]
 

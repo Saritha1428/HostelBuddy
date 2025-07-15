@@ -15,35 +15,17 @@
         <li class="nav-item">
           <router-link to="/hostel-buddy" class="nav-links">Home</router-link>
         </li>
-        <!-- <li class="nav-item">
-          <router-link to="/hostel-buddy/rooms" class="nav-links">Rooms</router-link>
+         <!-- <li class="nav-item">
+          <router-link to="/about" class="nav-links">About Us</router-link>
+        </li> 
+         <li class="nav-item">
+          <router-link to="/contact" class="nav-links">Contact Us</router-link>
         </li> -->
-        <!-- <li class="nav-item">
-          <router-link to="/hostel-buddy/services" class="nav-links">Services</router-link>
-        </li> -->
-        <!-- <li class="nav-item">
-          <router-link to="/hostel-buddy/contact" class="nav-links">Contact</router-link>
-        </li> -->
-        <li class="nav-item">
-          <router-link to="/complaints" class="nav-links">Track Complaints</router-link>
-        </li>
         <li class="nav-item">
           <router-link to="/announcements" class="nav-links">Announcements</router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/payments" class="nav-links">Pay Fees</router-link>
-        </li>
-        <!-- <li class="nav-item" v-if="user.role === 'warden'">
-          <router-link to="/warden-dashboard" class="nav-links">Dashboard</router-link>
-        </li> -->
-        <li class="nav-item">
-          <router-link to="/warden-dashboard" class="nav-links">Dashboard</router-link>
-        </li>
-        <!-- <li class="nav-item" v-if="user.role === 'warden'">
-          <router-link to="/admin-profile" class="nav-links">My Profile</router-link>
-        </li> -->
-        <li class="nav-item">
-          <router-link to="/room-assignment" class="nav-links">Room Assignment</router-link>
+       <li class="nav-item">
+          <router-link to="/help" class="nav-links">Queries</router-link>
         </li>
         <li class="nav-item">
           <router-link to="/hostel-occupancy" class="nav-links">Hostel Occupancy</router-link>
