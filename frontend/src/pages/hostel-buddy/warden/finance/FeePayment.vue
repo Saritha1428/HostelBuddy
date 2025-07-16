@@ -203,7 +203,6 @@
 <script>
 
 import Footer from '@/components/Footer.vue'
-import Navbar_warden from '../../../../components/Navbar_student.vue'
 import Navbar_student from '../../../../components/Navbar_student.vue'
 
 export default {

@@ -1,7 +1,7 @@
 <template>
+  <Navbar_student/>
   <div class="room-application-container">
-    <!-- Back Navigation -->
-   
+    
 
     <!-- Title -->
     <h1 class="application-title">Room Application</h1>
@@ -72,18 +72,27 @@
       <div class="form-actions">
         <button type="submit" class="submit-btn">Submit Application</button>
       </div>
-       <div class="back-nav">
+      <!-- Back Navigation -->
+    <div class="back-nav">
       <button @click="goBack" class="back-link">
         ← Back to Dashboard
       </button>
     </div>
     </form>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_student from '../../../../components/Navbar_student.vue';
+import Footer from '@/components/Footer.vue'
+
 export default {
   name: 'RoomApplication',
+   components: {
+    Navbar_student,
+    Footer
+  },
   data() {
     return {
       form: {
@@ -97,7 +106,7 @@ export default {
   },
   methods: {
     goBack() {
-      this.$router.go(-1);
+      this.$router.push({name: 'StudentDashboard'} );
     },
     submitApplication() {
       console.log('Application submitted:', this.form);
@@ -114,6 +123,7 @@ export default {
   margin: 0 auto;
   padding: 30px 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 1000px;
 }
 
 .back-nav {
@@ -158,20 +168,20 @@ export default {
 
 .form-row {
   display: flex;
-  flex-wrap: wrap;
   gap: 24px;
   justify-content: space-between;
+  flex-wrap: nowrap;
 }
 
 .form-group {
-  flex: 1 1 48%;
+  flex: 0 0 48%;
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 .form-group.full-width {
-  flex: 1 1 100%;
+  flex: 0 0 100%;
 }
 
 .form-group label {
@@ -234,15 +244,5 @@ export default {
 
 .submit-btn:hover {
   background-color: #17a689;
-}
-
-@media (max-width: 768px) {
-  .form-group {
-    flex: 1 1 100%;
-  }
-
-  .checkbox-label {
-    flex-wrap: wrap;
-  }
 }
 </style>

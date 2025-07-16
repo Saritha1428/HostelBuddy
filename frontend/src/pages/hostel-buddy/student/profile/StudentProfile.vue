@@ -1,74 +1,89 @@
 <template>
-  <Navbar_Student/>
-  <div class="profile-container">
-  
+   <Navbar_student/>
+  <div class="student-profile">
+   
+    <main>
+      <div class="profile-container">
+    
+        <!-- Profile Header -->
+        <div class="profile-header">
+          <div class="avatar-container">
+            <img :src="profile.imageUrl || defaultProfilePic" alt="Profile Picture" class="avatar">
+            <button @click="triggerFileInput" class="avatar-edit-btn">
+              <i class="fas fa-camera"></i>
+            </button>
+            <input type="file" ref="fileInput" @change="handleImageUpload" accept="image/*" style="display: none" />
+          </div>
+          <div class="profile-info">
+            <div v-if="editMode">
+              <input type="text" v-model="profile.name" class="edit-name-input" />
+            </div>
+            <div v-else>
+              <h1>{{ profile.name }}</h1>
+            </div>
+            <p class="role">Student</p>
+          </div>
+          <button @click="toggleEditMode" class="edit-profile-btn">
+            {{ editMode ? 'Cancel' : 'Edit Profile' }}
+          </button>
+        </div>
 
-    <!-- Profile Header -->
-    <div class="profile-header">
-      <div class="profile-pic-container">
-        <img :src="profile.imageUrl || defaultProfilePic" alt="Profile Picture" class="profile-pic">
-        <button class="edit-pic-btn" @click="triggerFileInput">Edit</button>
-        <input 
-          type="file" 
-          ref="fileInput" 
-          @change="handleImageUpload" 
-          accept="image/*" 
-          style="display: none"
-        >
-      </div>
-      <h1>{{ profile.name }}</h1>
-      <button class="edit-btn" @click="toggleEditMode">
-        {{ editMode ? 'Cancel' : 'Edit Profile' }}
-      </button>
-    </div>
+        <!-- Profile Content -->
+        <div class="profile-content">
+          <div class="profile-section">
+            <div class="section-header">
+              <h2><i class="fas fa-user-circle"></i> Personal Details</h2>
+              <button v-if="editMode" @click="saveProfile" class="save-btn">Save Changes</button>
+            </div>
 
-    <!-- Profile Details -->
-    <div class="profile-details">
-      <div class="detail-item">
-        <label>Date of Birth:</label>
-        <span v-if="!editMode">{{ profile.dob }}</span>
-        <input v-else type="date" v-model="profile.dob">
-      </div>
+            <div class="details-grid">
+              <div class="detail-item">
+                <label>Date of Birth</label>
+                <input v-if="editMode" v-model="profile.dob" type="date">
+                <p v-else>{{ profile.dob }}</p>
+              </div>
 
-      <div class="detail-item">
-        <label>Email:</label>
-        <span v-if="!editMode">{{ profile.email }}</span>
-        <input v-else type="email" v-model="profile.email">
-      </div>
+              <div class="detail-item">
+                <label>Email</label>
+                <input v-if="editMode" v-model="profile.email" type="email">
+                <p v-else>{{ profile.email }}</p>
+              </div>
 
-      <div class="detail-item">
-        <label>Phone Number:</label>
-        <span v-if="!editMode">{{ profile.phone }}</span>
-        <input v-else type="tel" v-model="profile.phone">
-      </div>
+              <div class="detail-item">
+                <label>Phone</label>
+                <input v-if="editMode" v-model="profile.phone" type="tel">
+                <p v-else>{{ profile.phone }}</p>
+              </div>
 
-      <div class="detail-item">
-        <label>Address:</label>
-        <span v-if="!editMode">{{ profile.address }}</span>
-        <textarea v-else v-model="profile.address"></textarea>
+              <div class="detail-item">
+                <label>Address</label>
+                <textarea v-if="editMode" v-model="profile.address"></textarea>
+                <p v-else>{{ profile.address }}</p>
+              </div>
+            </div>
+          </div>
+           <div class="back-nav">
+          <button @click="goToDashboard" class="back-link">
+            ← Back to Dashboard
+          </button>
+        </div>
+        </div>
       </div>
-
-      <div v-if="editMode" class="save-actions">
-        <button class="save-btn" @click="saveProfile">Save Changes</button>
-      </div>
-        <!-- Back Navigation -->
-    <div class="back-nav">
-      <button @click="goToDashboard" class="back-link">
-        ← Back to Dashboard
-      </button>
-    </div>
-    </div>
+      
+    </main>
+    
   </div>
   <Footer/>
 </template>
 
 <script>
-import Navbar_Student from '../../../../components/Navbar_Student.vue';
-import Footer from '../../../../components/Footer.vue';
+import Navbar_student from '../../../../components/Navbar_student.vue';
+import Footer from '@/components/Footer.vue';
 
 export default {
-  name: 'StudentProfile',components:{
-    Navbar_Student,
+  name: 'StudentProfile',
+    components: {
+    Navbar_student,
     Footer
   },
   data() {
@@ -84,7 +99,7 @@ export default {
         imageUrl: ''
       },
       originalProfile: {}
-    }
+    };
   },
   methods: {
     toggleEditMode() {
@@ -111,29 +126,36 @@ export default {
       this.$router.push({ name: 'StudentDashboard' });
     }
   }
-}
+};
 </script>
 
 <style scoped>
-.profile-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+.student-profile {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Back Button */
+.profile-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
 .back-nav {
-  margin-bottom: 30px;
+  margin-bottom: 1rem;
   text-align: center;
 }
-
 .back-link {
   display: inline-flex;
   align-items: center;
   background: none;
   border: none;
-  color: #1bbc9b;
+  color: #1BBC9B;
   font-weight: 600;
   padding: 8px 12px;
   border-radius: 6px;
@@ -145,144 +167,167 @@ export default {
   background-color: #e6fffa;
 }
 
-/* Profile Header */
 .profile-header {
   display: flex;
   align-items: center;
-  gap: 30px;
-  margin-bottom: 40px;
+  gap: 2rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
 }
 
-.profile-pic-container {
+.avatar-container {
   position: relative;
   width: 120px;
   height: 120px;
 }
 
-.profile-pic {
+.avatar {
   width: 100%;
   height: 100%;
-  border-radius: 20%;
+  border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #1bbc9b;
+  border: 4px solid #1BBC9B;
 }
 
-.edit-pic-btn {
+.avatar-edit-btn {
   position: absolute;
   bottom: 0;
   right: 0;
-  background: #1bbc9b;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #1BBC9B;
   color: white;
   border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
   cursor: pointer;
-  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.edit-pic-btn:hover {
-  background: #17a689;
+.avatar-edit-btn:hover {
+  background: #16a085;
 }
 
-.profile-header h1 {
-  font-size: 28px;
+.profile-info {
+  flex: 1;
+}
+.profile-info h1 {
   margin: 0;
-  flex-grow: 1;
+  font-size: 1.8rem;
+  color: #1BBC9B;
+}
+.role {
+  margin: 0.25rem 0;
+  font-weight: 500;
+  color: #555;
 }
 
-.edit-btn {
-  background-color: #1bbc9b;
+.edit-profile-btn {
+  background: #1BBC9B;
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.2s;
+  font-weight: 500;
+  transition: background 0.2s;
 }
-.edit-btn:hover {
-  background-color: #17a689;
+.edit-profile-btn:hover {
+  background: #16a085;
 }
 
-/* Profile Detail Section */
-.profile-details {
+.edit-name-input {
+  font-size: 1.8rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.profile-content {
   background: white;
-  border-radius: 10px;
-  padding: 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
 }
 
-.detail-item {
-  margin-bottom: 25px;
+.profile-section {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.section-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #1BBC9B;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.save-btn {
+  background: #1BBC9B;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.save-btn:hover {
+  background: #16a085;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
 }
 
 .detail-item label {
   display: block;
-  font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
   color: #555;
+  
 }
-
-.detail-item span {
-  display: block;
-  padding: 8px 0;
-  line-height: 1.5;
+.detail-item p {
+  margin: 0;
+  padding: 0.75rem;
+  background: #f9f9f9;
+  border-radius: 4px;
 }
-
 .detail-item input,
 .detail-item textarea {
   width: 100%;
-  padding: 10px;
+  padding: 0.75rem;
   border: 1px solid #ddd;
-  border-radius: 6px;
+  border-radius: 4px;
   font-family: inherit;
-  font-size: 16px;
+  
 }
-
 .detail-item textarea {
   min-height: 100px;
-  resize: vertical;
 }
 
-/* Save Button */
-.save-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 30px;
-}
-
-.save-btn {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background-color 0.2s;
-}
-.save-btn:hover {
-  background-color: #218838;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .profile-header {
     flex-direction: column;
     text-align: center;
-    gap: 20px;
+    gap: 1rem;
   }
-
-  .profile-header h1 {
+  .avatar-container {
+    margin: 0 auto;
+  }
+  .profile-info {
     text-align: center;
-  }
-
-  .edit-btn {
-    width: 100%;
   }
 }
 </style>
