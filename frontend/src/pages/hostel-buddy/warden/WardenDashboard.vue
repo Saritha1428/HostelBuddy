@@ -1,27 +1,27 @@
 <template>
   <div class="warden-dashboard">
-    <main>
-      <!-- Dashboard Header -->
-      <div class="dashboard-header">
-        <h1>Warden Dashboard</h1>
-        <!-- Profile Dropdown only in top-right -->
-        <div class="profile-dropdown">
-          <button class="profile-btn" @click="toggleProfileDropdown">
-            <i class="fas fa-user-circle"></i>
-            <span>Warden</span>
-            <i class="fas fa-caret-down"></i>
-          </button>
-          <div v-if="showDropdown" class="dropdown-content">
-            <router-link to="/admin-profile" @click="showDropdown = false">
-              <i class="fas fa-user"></i> My Profile
-            </router-link>
-            <a href="#" @click.prevent="logout">
-              <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-          </div>
+    <!-- Fixed Header -->
+    <header class="dashboard-header">
+      <h1>Warden Dashboard</h1>
+      <div class="profile-dropdown">
+        <button class="profile-btn" @click="toggleProfileDropdown">
+          <i class="fas fa-user-circle"></i>
+          <span>Warden</span>
+          <i class="fas fa-caret-down"></i>
+        </button>
+        <div v-if="showDropdown" class="dropdown-content">
+          <router-link to="/admin-profile" @click="showDropdown = false">
+            <i class="fas fa-user"></i> My Profile
+          </router-link>
+          <a href="#" @click.prevent="logout">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
         </div>
       </div>
+    </header>
 
+    <!-- Scrollable Content -->
+    <main class="dashboard-content">
       <!-- Key Metrics -->
       <div class="metrics-grid">
         <div class="metric-card" v-for="(metric, index) in metricList" :key="index">
@@ -54,7 +54,7 @@
         </div>
       </div>
 
-      <!-- Quick Access Sections - Moved all buttons here -->
+      <!-- Quick Access Sections -->
       <div class="quick-access-grid">
         <!-- First Row -->
         <div class="quick-access-card" @click="$router.push('/announcements')">
@@ -107,14 +107,14 @@
         </div>
 
         <!-- Third Row -->
-         
         <div class="quick-access-card" @click="navigateToHostelOccupancy">
           <h3>Hostel Occupancy</h3>
           <p>Which room are available</p>
           <button class="access-btn">
-            Check<i class="fas fa-arrow-right"></i>
+            Check <i class="fas fa-arrow-right"></i>
           </button>
         </div>
+
         <div class="quick-access-card" @click="navigateToRoomAllocation">
           <h3>Room Allocation</h3>
           <p>Manage student room assignments</p>
@@ -131,6 +131,7 @@
           </button>
         </div>
 
+        <!-- Fourth Row -->
         <div class="quick-access-card" @click="navigateToStudentRecords">
           <h3>Leave Approval</h3>
           <p>Manage student leave requests</p>
@@ -148,10 +149,11 @@
         </div>
       </div>
     </main>
+
+    <!-- Fixed Footer -->
     <Footer />
   </div>
 </template>
-
 
 <script>
 import Footer from '@/components/Footer.vue'
@@ -229,12 +231,12 @@ export default {
     logout() {
       console.log("Logging out...")
       this.showDropdown = false
-      // this.$router.push('/login')
+      this.$router.push('/login')
     },
     showQuickComplaintView() {
       this.$router.push('/complaint-management')
     },
-    navigateToHostelOccupancy(){
+    navigateToHostelOccupancy() {
       this.$router.push('/hostel-occupancy')
     },
     showFeeReports() {
@@ -256,7 +258,6 @@ export default {
 }
 </script>
 
-
 <style scoped>
 .warden-dashboard {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -264,54 +265,45 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #f9fafb;
 }
 
+/* Fixed Header Styles */
 .dashboard-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
   background: linear-gradient(135deg, #1BBC9B, #16a085);
   color: white;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .dashboard-header h1 {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 
-.quick-actions {
-  display: flex;
-  gap: 1rem;
+/* Scrollable Content Area */
+.dashboard-content {
+  flex: 1;
+  margin-top: 70px; /* Height of header */
+  margin-bottom: 60px; /* Height of footer */
+  padding: 1.5rem;
+  overflow-y: auto;
 }
 
-.action-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.25rem;
-  border-radius: 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.95rem;
-  transition: background 0.2s;
-}
-
-.action-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.action-btn i {
-  font-size: 1rem;
-}
-
+/* Metrics Grid */
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  padding: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .metric-card {
@@ -353,12 +345,13 @@ export default {
   font-size: 1.8rem;
 }
 
+/* Dashboard Sections */
 .dashboard-section {
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   padding: 1.5rem;
-  margin: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .dashboard-section h2 {
@@ -368,6 +361,7 @@ export default {
   padding-bottom: 0.75rem;
 }
 
+/* Activity List */
 .activity-list {
   margin-top: 1rem;
 }
@@ -426,11 +420,12 @@ export default {
   color: #777;
 }
 
+/* Quick Access Grid */
 .quick-access-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  padding: 0 1.5rem 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .quick-access-card {
@@ -439,6 +434,12 @@ export default {
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   padding: 1.5rem;
   border-top: 4px solid #1BBC9B;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.quick-access-card:hover {
+  transform: translateY(-5px);
 }
 
 .quick-access-card h3 {
@@ -469,83 +470,7 @@ export default {
   background: #16a085;
 }
 
-/* Modal Styles */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 500px;
-  padding: 1.5rem;
-  position: relative;
-}
-
-.close {
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-family: inherit;
-}
-
-.form-group textarea {
-  min-height: 120px;
-}
-
-.submit-btn {
-  background: #1BBC9B;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-top: 1rem;
-  width: 100%;
-}
-
-.submit-btn:hover {
-  background: #16a085;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
+/* Profile Dropdown */
 .profile-dropdown {
   position: relative;
   display: inline-block;
@@ -604,72 +529,46 @@ export default {
   text-align: center;
 }
 
-/* .quick-access-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  padding: 0 1.5rem 1.5rem;
-} */
-
-/* Add this if you want the cards to be equal height */
-/* .quick-access-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.access-btn {
-  margin-top: auto;
-}
-
-@media (max-width: 768px) {
-  .quick-access-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .quick-access-grid {
-    grid-template-columns: 1fr;
-  }
-} */
-
+/* Responsive Styles */
 @media (max-width: 768px) {
   .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
     padding: 1rem;
   }
   
-  .quick-actions {
-    width: 100%;
-    flex-direction: column;
-  }
-  
-  .action-btn {
-    justify-content: center;
+  .dashboard-content {
+    margin-top: 60px;
+    padding: 1rem;
   }
   
   .metrics-grid {
     grid-template-columns: 1fr 1fr;
-    padding: 1rem;
     gap: 1rem;
   }
   
-  .dashboard-section {
-    margin: 1rem;
-  }
-  
   .quick-access-grid {
-    padding: 0 1rem 1rem;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 480px) {
   .metrics-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .quick-access-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.3rem;
+  }
+  
+  .profile-btn span {
+    display: none;
+  }
+  
+  .profile-btn i.fa-caret-down {
+    display: none;
   }
 }
 </style>

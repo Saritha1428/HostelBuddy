@@ -1,41 +1,40 @@
 <template>
   <div class="login-wrapper">
-    <transition name="slow-fade" mode="out-in">
-      <div key="login" class="login-card">
-        <!-- LEFT: Login Form -->
-        <div class="login-box">
-          <h2 class="title">Sign In</h2>
-          <div class="role-selection">
-            <button :class="{ active: role === 'Student' }" @click="selectRole('Student')">Student</button>
-            <button :class="{ active: role === 'Warden' }" @click="selectRole('Warden')">Warden</button>
+    <div class="login-card">
+      <div class="login-box">
+        <h2 class="title">Sign In</h2>
+        <div class="role-selection">
+          <button :class="{ active: role === 'Student' }" @click="selectRole('Student')">Student</button>
+          <button :class="{ active: role === 'Warden' }" @click="selectRole('Warden')">Warden</button>
+        </div>
+        <form @submit.prevent="handleLogin">
+          <input type="text" placeholder="Email or Phone" v-model="email" required />
+          <input type="password" placeholder="Password" v-model="password" required />
+          <div class="options">
+            <label><input type="checkbox" v-model="remember" /> Remember me</label>
+            <a @click.prevent="goToForgot">Forgot password?</a>
           </div>
-          <form @submit.prevent="handleLogin">
-            <input type="text" placeholder="Email or Phone" v-model="email" required />
-            <input type="password" placeholder="Password" v-model="password" required />
-            <div class="options">
-              <label><input type="checkbox" v-model="remember" /> Remember me</label>
-              <a @click.prevent="goToForgot">Forgot password?</a>
-            </div>
-            <button type="submit" class="btn">Sign In</button>
-          </form>
-        </div>
+          <button type="submit" class="btn">Sign In</button>
+        </form>
+      </div>
 
-        <!-- RIGHT: Welcome Panel -->
-        <div class="welcome-box">
-          <h3>{{ welcomeTitle }}</h3>
-          <p>{{ welcomeText }}</p>
-          <button class="btn transparent" @click="goToRegister">Register</button>
-        </div>
+      <div class="welcome-box">
+        <h3>{{ welcomeTitle }}</h3>
+        <p>{{ welcomeText }}</p>
+        <button class="btn transparent" @click="goToRegister">Sign Up</button>
+      </div>
+    </div>
+
+    <transition name="modal-fade">
+      <div v-if="showForgotModal" class="modal-overlay">
+        <ForgotPassword @close="showForgotModal = false" />
       </div>
     </transition>
-
-    <!-- Forgot Password Modal -->
-    <ForgotPasswordModal v-if="showForgotModal" @close="showForgotModal = false" />
   </div>
 </template>
 
 <script>
-import ForgotPassword from '../auth/ForgotPassword.vue'
+import ForgotPassword from './ForgotPassword.vue'
 
 export default {
   name: 'Login',
@@ -62,10 +61,13 @@ export default {
     }
   },
   methods: {
-      handleLogin() {
-    alert(`Logged in as ${this.role} – ${this.email}`);
-    this.$router.push('/student-dashboard');
-  },
+    handleLogin() {
+      if (this.role === 'Student') {
+        this.$router.push('/student-dashboard');
+      } else {
+        this.$router.push('/warden-dashboard');
+      }
+    },
     selectRole(role) {
       this.role = role;
     },
@@ -85,7 +87,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #e6ebff;
+  background: white;
   position: relative;
   overflow: hidden;
 }
@@ -96,6 +98,10 @@ export default {
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  position: relative;
+  z-index: 1;
 }
 
 .login-box {
@@ -225,23 +231,28 @@ input:focus {
   margin-bottom: 20px;
 }
 
-/* Enhanced Slow Motion Transitions */
-.slow-fade-enter-active {
-  transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.slow-fade-leave-active {
-  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.slow-fade-enter-from {
-  opacity: 0;
-  transform: translateY(20px) scale(0.98);
-}
-.slow-fade-leave-to {
-  opacity: 0;
-  transform: translateY(-20px) scale(0.98);
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-/* Additional element animations */
+.modal-fade-enter-active,
+.modal-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.modal-fade-enter-from,
+.modal-fade-leave-to {
+  opacity: 0;
+}
+
 .login-box,
 .welcome-box {
   animation: fadeInUp 1s ease;

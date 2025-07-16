@@ -1,26 +1,27 @@
 <template>
   <div class="student-dashboard">
-    <main>
-      <!-- Dashboard Header -->
-      <div class="dashboard-header">
-        <h1>Student Dashboard</h1>
-        <div class="profile-dropdown">
-          <button class="profile-btn" @click="toggleProfileDropdown">
-            <i class="fas fa-user-circle"></i>
-            <span>Student</span>
-            <i class="fas fa-caret-down"></i>
-          </button>
-          <div v-if="showDropdown" class="dropdown-content">
-            <router-link to="/student-profile" @click="showDropdown = false">
-              <i class="fas fa-user"></i> My Profile
-            </router-link>
-            <a href="#" @click.prevent="logout">
-              <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-          </div>
+    <!-- Fixed Header -->
+    <header class="dashboard-header">
+      <h1>Student Dashboard</h1>
+      <div class="profile-dropdown">
+        <button class="profile-btn" @click="toggleProfileDropdown">
+          <i class="fas fa-user-circle"></i>
+          <span>Student</span>
+          <i class="fas fa-caret-down"></i>
+        </button>
+        <div v-if="showDropdown" class="dropdown-content">
+          <router-link to="/student-profile" @click="showDropdown = false">
+            <i class="fas fa-user"></i> My Profile
+          </router-link>
+          <a href="#" @click.prevent="logout">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </a>
         </div>
       </div>
+    </header>
 
+    <!-- Scrollable Content -->
+    <main class="dashboard-content">
       <!-- Key Metrics -->
       <div class="metrics-grid">
         <div class="metric-card">
@@ -145,7 +146,7 @@
 
         <div class="quick-access-card" @click="$router.push('/cancel-meal')">
           <h3><i class="fas fa-book"></i> Cancel Meal</h3>
-          <p>Request to  cancel meal</p>
+          <p>Request to cancel meal</p>
           <button class="access-btn">
             Request <i class="fas fa-arrow-right"></i>
           </button>
@@ -175,9 +176,10 @@
             Submit <i class="fas fa-arrow-right"></i>
           </button>
         </div>
-
       </div>
     </main>
+
+    <!-- Fixed Footer -->
     <Footer />
   </div>
 </template>
@@ -213,31 +215,45 @@ export default {
   color: #333;
   min-height: 100vh;
   background-color: #f9fafb;
-  padding: 40px 20px;
   display: flex;
   flex-direction: column;
 }
 
+/* Fixed Header Styles */
 .dashboard-header {
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 1rem 2rem;
   background: linear-gradient(135deg, #1BBC9B, #16a085);
   color: white;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .dashboard-header h1 {
   margin: 0;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+}
+
+/* Scrollable Content Styles */
+.dashboard-content {
+  flex: 1;
+  margin-top: 70px; /* Height of header */
+  margin-bottom: 60px; /* Height of footer */
+  padding: 1.5rem;
+  overflow-y: auto;
 }
 
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  padding: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .metric-card {
@@ -284,7 +300,7 @@ export default {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   padding: 1.5rem;
-  margin: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .dashboard-section h2 {
@@ -351,7 +367,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
-  padding: 0 1.5rem 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .quick-access-card {
@@ -460,24 +476,20 @@ export default {
 
 @media (max-width: 768px) {
   .dashboard-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .dashboard-content {
+    margin-top: 60px;
     padding: 1rem;
   }
   
   .metrics-grid {
     grid-template-columns: 1fr 1fr;
-    padding: 1rem;
     gap: 1rem;
   }
   
-  .dashboard-section {
-    margin: 1rem;
-  }
-  
   .quick-access-grid {
-    padding: 0 1rem 1rem;
     grid-template-columns: 1fr 1fr;
   }
 }
@@ -489,6 +501,18 @@ export default {
   
   .quick-access-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 1.3rem;
+  }
+  
+  .profile-btn span {
+    display: none;
+  }
+  
+  .profile-btn i.fa-caret-down {
+    display: none;
   }
 }
 </style>

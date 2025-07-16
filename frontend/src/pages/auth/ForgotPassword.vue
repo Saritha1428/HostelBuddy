@@ -1,11 +1,9 @@
 <template>
   <div class="forgot-wrapper">
     <div class="forgot-container">
-     
+      <button class="close-button" @click="goToLogin">×</button>
+      <h2 class="forgot-heading">Forgot Password</h2>
 
-      <h2 class="forgot-heading">OTP Verification</h2>
-
-      <!-- Input for phone/email -->
       <input
         type="text"
         placeholder="Phone number or email"
@@ -13,10 +11,8 @@
         class="input-field"
       />
 
-      <!-- Send OTP Button -->
       <button class="action-button" @click="sendOtp">Send OTP</button>
 
-      <!-- OTP inputs group -->
       <div class="otp-group">
         <input
           v-for="(digit, index) in otpDigits"
@@ -30,10 +26,8 @@
         />
       </div>
 
-      <!-- Verify OTP Button -->
       <button class="action-button" @click="verifyOtp">Verify OTP</button>
 
-      <!-- Password inputs -->
       <input
         type="password"
         placeholder="New Password"
@@ -47,15 +41,18 @@
         class="input-field"
       />
 
-      <!-- Reset Password Button -->
       <button class="action-button" @click="resetPassword">Reset Password</button>
 
-      <p class="back-login" @click="login">
-        ← I remember my password, go to Login
+      <p class="back-login" @click="goToLogin">
+        ← Back to Login
       </p>
 
-      <p v-if="otpMessage" class="success-message">{{ otpMessage }}</p>
-      <p v-if="message" class="success-message">{{ message }}</p>
+      <p v-if="otpMessage" class="message" :class="{ 'error-message': otpMessage.startsWith('❗'), 'success-message': !otpMessage.startsWith('❗') }">
+        {{ otpMessage }}
+      </p>
+      <p v-if="message" class="message" :class="{ 'error-message': message.startsWith('❗'), 'success-message': !message.startsWith('❗') }">
+        {{ message }}
+      </p>
     </div>
   </div>
 </template>
@@ -81,7 +78,7 @@ export default {
         this.clearMessageAfterDelay();
         return;
       }
-      this.message = ` OTP sent to ${this.identifier}`;
+      this.message = `📤 OTP sent to ${this.identifier}`;
       this.otpVerified = false;
       this.clearMessageAfterDelay();
     },
@@ -119,7 +116,7 @@ export default {
         return;
       }
 
-      this.message = " Password reset successful!";
+      this.message = "🎉 Password reset successful!";
       this.clearMessageAfterDelay();
 
       this.identifier = "";
@@ -127,9 +124,13 @@ export default {
       this.newPassword = "";
       this.confirmPassword = "";
       this.otpVerified = false;
+      
+      setTimeout(() => {
+        this.goToLogin();
+      }, 2000);
     },
     goToLogin() {
-      this.$router.push("/login");
+      this.$emit('close');
     },
     clearMessageAfterDelay() {
       setTimeout(() => {
@@ -147,40 +148,47 @@ export default {
 
 <style scoped>
 .forgot-wrapper {
-  height: 100vh;
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f5f5f5;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  
 }
 
 .forgot-container {
-  width: 100%;
-  max-width: 380px;
   padding: 30px;
   background: white;
   border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   text-align: center;
+  animation: slideFadeIn 0.4s ease;
 }
 
-.app-title {
-  font-size: 26px;
-  margin-bottom: 10px;
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #888;
 }
-.title-highlight {
-  color: #1bbc9b;
-  font-weight: 600;
-}
-.title-bold {
-  color: #000;
-  font-weight: 700;
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .forgot-heading {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 22px;
+  font-weight: bold;
+  color: #1bbc9b;
   margin-bottom: 20px;
 }
 
@@ -192,6 +200,7 @@ export default {
   border: 1px solid #ccc;
   font-size: 14px;
   outline: none;
+  transition: border-color 0.3s ease;
 }
 
 .input-field:focus {
@@ -200,7 +209,7 @@ export default {
 
 .otp-group {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   margin-bottom: 15px;
   justify-content: center;
   align-items: center;
@@ -214,6 +223,7 @@ export default {
   border-radius: 8px;
   border: 1px solid #ccc;
   outline: none;
+  transition: border-color 0.3s ease;
 }
 
 .otp-input:focus {
@@ -239,20 +249,29 @@ export default {
 
 .back-login {
   margin-top: 20px;
-  font-size: 13px;
+  font-size: 14px;
   color: #1bbc9b;
   cursor: pointer;
   user-select: none;
+  transition: color 0.3s ease;
 }
 
 .back-login:hover {
+  color: #0ca488;
   text-decoration: underline;
 }
 
-.success-message {
+.message {
   margin-top: 10px;
   font-size: 14px;
-  color: green;
   font-weight: 500;
+}
+
+.success-message {
+  color: green;
+}
+
+.error-message {
+  color: #e74c3c;
 }
 </style>

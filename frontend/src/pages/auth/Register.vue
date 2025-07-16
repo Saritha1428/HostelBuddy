@@ -2,14 +2,12 @@
   <div class="register-wrapper">
     <transition name="slow-fade" mode="out-in">
       <div key="register" class="register-card">
-        <!-- LEFT: Welcome Panel -->
         <div class="side-panel">
           <h2>{{ welcomeTitle }}</h2>
           <p>{{ welcomeText }}</p>
           <button class="btn transparent" @click="goToLogin">Sign In</button>
         </div>
 
-        <!-- RIGHT: Registration Form -->
         <div class="form-container">
           <h2 class="title">Create Account</h2>
           <form @submit.prevent="handleRegister">
@@ -17,6 +15,12 @@
             <input type="email" placeholder="Email" v-model="email" required />
             <input type="password" placeholder="Password" v-model="password" required />
             <input type="password" placeholder="Confirm Password" v-model="confirmPassword" required />
+            
+            <!-- <div class="role-selection">
+              <button :class="{ active: role === 'Student' }" @click="selectRole('Student')">Student</button>
+              <button :class="{ active: role === 'Warden' }" @click="selectRole('Warden')">Warden</button>
+            </div> -->
+            
             <button type="submit" class="btn">Sign Up</button>
           </form>
         </div>
@@ -35,43 +39,60 @@ export default {
       password: '',
       confirmPassword: '',
       role: 'Student'
-    };
+    }
   },
   computed: {
     welcomeTitle() {
-      return this.role === 'Student' ? 'Welcome Back!' : 'Hello Warden!';
+      return this.role === 'Student' ? 'Welcome New Student!' : 'Warden Registration'
     },
     welcomeText() {
       return this.role === 'Student'
-        ? 'Enter your personal details to use all site features.'
-        : 'Manage your hostel with ease.';
+        ? 'Join our hostel community and enjoy seamless management.'
+        : 'Register as warden to manage hostel operations.'
     }
   },
   methods: {
-    handleRegister() {
-      if (this.password !== this.confirmPassword) {
-        alert('Passwords do not match!');
-        return;
-      }
-    alert(`Registered: ${this.fullName}`);
-this.goToLogin();
-
+    selectRole(role) {
+      this.role = role
     },
+    
+    async handleRegister() {
+      if (this.password !== this.confirmPassword) {
+        alert('Passwords do not match!')
+        return
+      }
+
+      try {
+        const userData = {
+          fullName: this.fullName,
+          email: this.email,
+          password: this.password,
+          role: this.role
+        }
+        
+        console.log('Registering user:', userData)
+        localStorage.setItem('user', JSON.stringify(userData))
+        
+        this.$router.push(this.role === 'Student' ? '/student-dashboard' : '/warden-dashboard')
+      } catch (error) {
+        alert(`Registration failed: ${error.message}`)
+      }
+    },
+    
     goToLogin() {
-      this.$router.push('/login');
+      this.$router.push('/login')
     }
   }
-};
+}
 </script>
 
 <style scoped>
 .register-wrapper {
   height: 100vh;
-  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f5f5f5;
+  background: white;
   overflow: hidden;
 }
 
@@ -82,6 +103,8 @@ this.goToLogin();
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   background: white;
   overflow: hidden;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
 }
 
 .side-panel {
@@ -93,8 +116,6 @@ this.goToLogin();
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  border-top-left-radius: 100px;
-  border-bottom-left-radius: 100px;
   animation: fadeInLeft 1s ease;
 }
 
@@ -122,6 +143,27 @@ this.goToLogin();
   color: #1bbc9b;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.role-selection {
+  display: flex;
+  margin: 15px 0;
+  background: #f0f0f0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.role-selection button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+}
+.role-selection button.active {
+  background: #1bbc9b;
+  color: white;
 }
 
 input {
@@ -169,7 +211,6 @@ input:focus {
   transform: translateY(-2px);
 }
 
-/* Enhanced Slow Motion Transitions */
 .slow-fade-enter-active {
   transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -185,7 +226,6 @@ input:focus {
   transform: translateY(-20px) scale(0.98);
 }
 
-/* Additional animations */
 @keyframes fadeInLeft {
   from {
     opacity: 0;
