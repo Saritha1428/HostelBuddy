@@ -615,8 +615,8 @@ export default {
 .contact-page main {
   position: relative;
   background: 
-    linear-gradient(to bottom, rgba(27, 188, 155, 0.1), transparent 40%),
-    linear-gradient(to top, rgba(27, 188, 155, 0.1), transparent 40%),
+    linear-gradient(to bottom, rgba(27, 188, 155, 0.1), transparent 100%),
+    linear-gradient(to top, rgba(27, 188, 155, 0.1), transparent 100%),
     #ffffff; /* base background */
   padding-bottom: 50px;
   overflow: hidden;

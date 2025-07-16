@@ -1,4 +1,5 @@
 <template>
+  <Navbar_warden/>
   <div class="room-change-container">
     <div class="approval-section">
       <div class="room-change-approval">
@@ -49,11 +50,18 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_warden from '../../../components/Navbar_warden.vue';
+import Footer from '../../../components/Footer.vue';
+
 export default {
   name: 'RoomChangeApproval',
+   components:{
+    Navbar_warden,Footer
+  },
   data() {
     return {
       students: [

@@ -1,7 +1,7 @@
 <template>
   <div class="about-us">
     <Navbar />
-    <div class="top-section">
+    <div class="top-section ">
       <p class="breadcrumb">Hostel Buddy / About Us</p>
       <h1>About <span class="highlight">Us</span></h1>
 
@@ -12,67 +12,96 @@
       </div>
 
       <!-- THE WHY -->
-      <div v-if="currentTab === 'why'" class="about-content">
-        <div class="text-section">
-          <h2>We didn't find the right hostel system,</h2>
-          <h2 class="highlight">so we built it for everyone</h2>
-          <p>
-            That’s how Hostel Buddy came to life. Messy logbooks, miscommunication, lost complaints,
-            and confused students — not anymore. Hostel Buddy is designed by students, for students.
-            We get the chaos, and we’re here to fix it. Smarter systems. Happier lives.
-          </p>
+      <div v-if="currentTab === 'why'" class="content-section">
+        <div class="content-row">
+          <div class="text-content">
+            <h2>We saw hostel life needed a <span class="highlight">change</span></h2>
+            <p>
+              Traditional hostel management was stuck in paperwork and chaos – lost complaints,
+              endless queues for fees, and miscommunication between students and administration.
+              We experienced these problems firsthand during our hostel days.
+            </p>
+          </div>
+          <div class="image-content">
+            <img src="https://www.thehivehostels.com/uploads/images/1658301040_7796f3aa4d7819a2f5d5.jpeg" alt="Messy paperwork" />
+          </div>
         </div>
-        <div class="image-section">
-          <img src="@/assets/images/payment.jpg" alt="Hostel Room" />
+
+        <div class="content-row reverse">
+          <div class="text-content">
+            <h2>So we created a <span class="highlight">digital solution</span></h2>
+            <p>
+              Hostel Buddy was born from countless late-night discussions in common rooms,
+              where we imagined how technology could solve these daily frustrations.
+              Our mission: transform hostel living through smart digital tools.
+            </p>
+          </div>
+          <div class="image-content">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" alt="Students discussing" />
+          </div>
         </div>
       </div>
 
       <!-- THE WHAT -->
-      <div v-if="currentTab === 'what'" class="about-content">
-        <div class="text-section">
-          <h2>What is Hostel Buddy?</h2>
-          <h2 class="highlight">Your smart hostel companion</h2>
-          <p>
-            From managing mess schedules, tracking complaints, to finding the perfect roommate —
-            Hostel Buddy makes hostel life smooth and simple. Our features are built for both students
-            and administrators to stay informed and in control.
-          </p>
+      <div v-if="currentTab === 'what'" class="content-section">
+        <div class="content-row">
+          <div class="text-content">
+            <h2>Your complete hostel <span class="highlight">companion</span></h2>
+            <p>
+              Hostel Buddy consolidates all aspects of hostel life into one platform –
+              from room allocation and fee payments to mess management and maintenance requests.
+              No more running between different offices.
+            </p>
+          </div>
+          <div class="image-content">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" alt="App interface" />
+          </div>
         </div>
-        <div class="image-section">
-          <img src="@/assets/images/payment.jpg" alt="Features Overview" />
+
+        <div class="content-row reverse">
+          <div class="text-content">
+            <h2>Built for <span class="highlight">students</span> and <span class="highlight">administrators</span></h2>
+            <p>
+              We designed separate interfaces that serve both students and wardens equally well.
+              Students get convenience, wardens get better oversight – everyone wins with
+              streamlined operations.
+            </p>
+          </div>
+          <div class="image-content">
+            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c" alt="Team working" />
+          </div>
         </div>
       </div>
 
       <!-- THE HOW -->
-      <div v-if="currentTab === 'how'" class="about-content">
-        <div class="text-section">
-          <h2>How do we make it work?</h2>
-          <h2 class="highlight">By combining tech + student insights</h2>
-          <p>
-            Hostel Buddy integrates smart web tools with real feedback from hostelers like you.
-            We continually update based on student needs. It’s a live platform built on
-            experience, empathy, and engineering.
-          </p>
+      <div v-if="currentTab === 'how'" class="content-section">
+        <div class="content-row">
+          <div class="text-content">
+            <h2><span class="highlight">Technology</span> meets real needs</h2>
+            <p>
+              Our platform combines cloud infrastructure with mobile-first design,
+              ensuring reliability and accessibility. We use student feedback loops to
+              continuously improve features based on actual hostel experiences.
+            </p>
+          </div>
+          <div class="image-content">
+            <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643" alt="Coding session" />
+          </div>
         </div>
-        <div class="image-section">
-          <img src="@/assets/images/payment.jpg" alt="How it works" />
-        </div>
-      </div>
-    </div>
 
-    <div class="bottom-section">
-      <div class="image-section">
-        <img src="@/assets/images/payment.jpg" alt="Hostel Building" />
-      </div>
-      <div class="text-section">
-        <h2>You wanted better hostel life,</h2>
-        <h2 class="highlight">so we started from scratch</h2>
-        <p>
-          It all began in 2024, when a group of hostelers realized the system was broken. From
-          maintenance to mess to roommate matching — everything needed a smart touch. And so,
-          Hostel Buddy was born — to bring technology into the hostel world. Now it’s smarter,
-          easier, and student-friendly.
-        </p>
+        <div class="content-row reverse">
+          <div class="text-content">
+            <h2>Built by <span class="highlight">hostelers</span>, for <span class="highlight">hostelers</span></h2>
+            <p>
+              Every feature goes through testing with real students and wardens before launch.
+              We maintain regular feedback sessions to ensure Hostel Buddy evolves with
+              changing needs in hostel communities.
+            </p>
+          </div>
+          <div class="image-content ">
+            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216" alt="Team meeting" />
+          </div>
+        </div>
       </div>
     </div>
     <Footer />
@@ -84,7 +113,6 @@ import { ref } from 'vue'
 const currentTab = ref('why')
 import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
-
 </script>
 
 <style scoped>
@@ -95,9 +123,16 @@ import Footer from '@/components/Footer.vue'
 
 .top-section {
   padding: 3rem 2rem;
-  background: linear-gradient(to bottom, #f0fdfc, #ffffff);
+  background: linear-gradient(to bottom, 
+    #e0f8f6 0%, 
+    #f0fdfc 30%, 
+    #ffffff 50%, 
+    #f0fdfc 70%, 
+    #e0f8f6 100%);
+  position: relative;
 }
 
+/* Breadcrumb */
 .breadcrumb {
   font-size: 0.9rem;
   color: #888;
@@ -113,6 +148,7 @@ h1 {
   color: #44d4c5;
 }
 
+/* Tabs */
 .tab-container {
   display: flex;
   background: #fff;
@@ -138,58 +174,72 @@ h1 {
   font-weight: bold;
 }
 
-.about-content {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
-.text-section {
-  flex: 1;
-}
-
-.text-section h2 {
-  font-size: 1.8rem;
-  margin: 0.5rem 0;
-}
-
-.text-section p {
-  font-size: 1rem;
-  color: #555;
-  margin-top: 1rem;
-}
-
-.image-section {
-  flex: 1;
-  text-align: center;
-}
-
-.image-section img {
-  max-width: 100%;
-  border-radius: 1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.bottom-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  padding: 3rem 2rem;
-  background: linear-gradient(160deg, #ffffff 60%, #e9fefb 60%);
-  flex-wrap: wrap;
+/* Sections */
+.content-section {
   margin-top: 2rem;
 }
 
-.bottom-section .text-section h2 {
-  font-size: 1.8rem;
-  margin: 0.5rem 0;
+.content-row {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  margin-bottom: 3rem;
 }
 
-.bottom-section .text-section p {
-  font-size: 1rem;
-  color: #555;
-  margin-top: 1rem;
+.content-row.reverse {
+  flex-direction: row-reverse;
 }
+
+.text-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.text-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.text-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+
+.image-content {
+  flex: 1;
+  min-width: 300px;
+}
+
+.image-content img {
+  width: 85%;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  max-height: 350px;
+  object-fit: cover;
+  margin-left: 20px;
+}
+.image-content img:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .content-row,
+  .content-row.reverse {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .text-content,
+  .image-content {
+    width: 90%;
+  }
+
+  .top-section {
+    padding: 2rem 1rem;
+  }
+}
+
 </style>

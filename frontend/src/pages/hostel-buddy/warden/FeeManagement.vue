@@ -1,4 +1,5 @@
 <template>
+  <Navbar_warden/>
   <div class="fee-management-container">
     <div class="page-header">
       <h1>Fee Management</h1>
@@ -65,11 +66,18 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_warden from '../../../components/Navbar_warden.vue';
+import Footer from '../../../components/Footer.vue';
 export default {
   name: 'FeeManagement',
+  components:{
+    Navbar_warden,Footer
+
+  },
   data() {
     return {
       feeData: {

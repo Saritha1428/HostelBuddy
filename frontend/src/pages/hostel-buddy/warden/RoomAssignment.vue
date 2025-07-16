@@ -1,6 +1,6 @@
 <template>
   <div class="room-assignment-page">
-    <!-- <Navbar /> -->
+    <Navbar_warden />
     <main class="main-content">
       <div class="room-assignment-container">
         <h1>Room Allocation</h1>
@@ -45,13 +45,15 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
+
 import Footer from '@/components/Footer.vue'
+import Navbar_warden from '../../../components/Navbar_warden.vue'
+
 
 export default {
   name: 'RoomAssignment',
   components: {
-    Navbar,
+    Navbar_warden,
     Footer
   },
   data() {

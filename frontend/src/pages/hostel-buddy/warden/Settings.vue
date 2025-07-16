@@ -1,4 +1,5 @@
 <template>
+  <Navbar_warden/>
   <div class="hostel-configurator">
     <header>
       <h1>Hostel Settings</h1>
@@ -160,11 +161,18 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_warden from '../../../components/Navbar_warden.vue';
+import Footer from '../../../components/Footer.vue';
+
 export default {
   name: 'HostelConfigurator',
+   components:{
+    Navbar_warden,Footer
+  },
   data() {
     return {
       leaveSettings: {

@@ -1,4 +1,5 @@
 <template>
+  <Navbar_warden/>
   <div class="payment-tracking-container">
     <div class="header">
       <h1>Payment Tracking</h1>
@@ -79,11 +80,18 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Footer from '../../../components/Footer.vue';
+import Navbar_warden from '../../../components/Navbar_warden.vue';
+
 export default {
-  data() {
+  
+  components:{
+    Navbar_warden,Footer
+  },data() {
     return {
       currentFilter: 'all',
       searchQuery: '',

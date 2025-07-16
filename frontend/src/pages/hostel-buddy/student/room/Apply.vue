@@ -1,85 +1,89 @@
 <template>
-  <Navbar_Student/>
   <div class="room-application-container">
+    <!-- Back Navigation -->
    
 
+    <!-- Title -->
     <h1 class="application-title">Room Application</h1>
 
+    <!-- Form -->
     <form @submit.prevent="submitApplication" class="application-form">
-      <div class="form-group">
-        <label for="preferred-building">Preferred Building:</label>
-        <select id="preferred-building" v-model="form.preferredBuilding" required>
-          <option value="">Select Building</option>
-          <option value="A">Building A</option>
-          <option value="B">Building B</option>
-          <option value="C">Building C</option>
-        </select>
+      <!-- Row 1 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="preferred-building">Preferred Building:</label>
+          <select id="preferred-building" v-model="form.preferredBuilding" required>
+            <option value="">Select Building</option>
+            <option value="A">Building A</option>
+            <option value="B">Building B</option>
+            <option value="C">Building C</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="room-type">Room Type:</label>
+          <select id="room-type" v-model="form.roomType" required>
+            <option value="">Select Room Type</option>
+            <option value="single">Single Occupancy</option>
+            <option value="double">Double Occupancy</option>
+            <option value="shared">Shared (4 person)</option>
+          </select>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="room-type">Room Type:</label>
-        <select id="room-type" v-model="form.roomType" required>
-          <option value="">Select Room Type</option>
-          <option value="single">Single Occupancy</option>
-          <option value="double">Double Occupancy</option>
-          <option value="shared">Shared (4 person)</option>
-        </select>
+      <!-- Row 2 -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="preferred-mates">Preferred Roommates (if any):</label>
+          <input
+            type="text"
+            id="preferred-mates"
+            v-model="form.preferredMates"
+            placeholder="Enter student IDs separated by commas"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="special-requirements">Special Requirements:</label>
+          <textarea
+            id="special-requirements"
+            v-model="form.specialRequirements"
+            placeholder="Any medical conditions or special needs"
+          ></textarea>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="preferred-mates">Preferred Roommates (if any):</label>
-        <input 
-          type="text" 
-          id="preferred-mates" 
-          v-model="form.preferredMates" 
-          placeholder="Enter student IDs separated by commas"
-        >
+      <!-- Checkbox -->
+      <div class="form-row">
+        <div class="form-group full-width checkbox-wrapper">
+          <label class="checkbox-label">
+            <input
+              type="checkbox"
+              id="terms-agreement"
+              v-model="form.termsAgreed"
+              required
+            />
+            <span>I agree to the hostel rules and regulations</span>
+          </label>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="special-requirements">Special Requirements:</label>
-        <textarea 
-          id="special-requirements" 
-          v-model="form.specialRequirements" 
-          placeholder="Any medical conditions or special needs"
-        ></textarea>
-      </div>
-
-      <div class="form-group checkbox-group">
-        <input 
-          type="checkbox" 
-          id="terms-agreement" 
-          v-model="form.termsAgreed" 
-          required
-        >
-        <label for="terms-agreement">
-          I agree to the hostel rules and regulations
-        </label>
-      </div>
-
+      <!-- Submit Button -->
       <div class="form-actions">
         <button type="submit" class="submit-btn">Submit Application</button>
       </div>
-      <div class="back-nav">
+       <div class="back-nav">
       <button @click="goBack" class="back-link">
-      ← Back to Dashboard
+        ← Back to Dashboard
       </button>
     </div>
     </form>
-     
   </div>
-  <Footer/>
 </template>
 
 <script>
-import Navbar_Student from '../../../../components/Navbar_Student.vue'
-import Footer from '../../../../components/Footer.vue'
-
 export default {
-  name: 'RoomApplication',components: {
-    Navbar_Student,
-    Footer
-  },
+  name: 'RoomApplication',
   data() {
     return {
       form: {
@@ -87,36 +91,33 @@ export default {
         roomType: '',
         preferredMates: '',
         specialRequirements: '',
-        termsAgreed: false
-      }
-    }
+        termsAgreed: false,
+      },
+    };
   },
   methods: {
     goBack() {
-      this.$router.go(-1)
+      this.$router.go(-1);
     },
     submitApplication() {
-      console.log('Application submitted:', this.form)
-      alert('Application submitted successfully!')
-      this.$router.push(`{ name: 'Dashboard' }`)
-    }
-  }
-  
-}
+      console.log('Application submitted:', this.form);
+      alert('Application submitted successfully!');
+      this.$router.push({ name: 'StudentDashboard' });
+    },
+  },
+};
 </script>
 
 <style scoped>
 .room-application-container {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px 20px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .back-nav {
-  margin-bottom: 10px;
-  margin-top: 20px;
-  justify-content: center;
+  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -142,24 +143,40 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-bottom: 30px;
+  font-size: 26px;
 }
 
 .application-form {
   background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: space-between;
 }
 
 .form-group {
-  margin-bottom: 25px;
+  flex: 1 1 48%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-group.full-width {
+  flex: 1 1 100%;
 }
 
 .form-group label {
-  display: block;
   font-weight: 600;
-  margin-bottom: 8px;
-  color: #555;
+  color: #333;
 }
 
 .form-group select,
@@ -167,58 +184,65 @@ export default {
 .form-group textarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #ddd;
+  border: 1px solid #ccc;
   border-radius: 6px;
-  font-family: inherit;
   font-size: 16px;
-}
-
-.form-group select:focus,
-.form-group input:focus,
-.form-group textarea:focus {
-  border-color: #1bbc9b;
+  font-family: inherit;
 }
 
 .form-group textarea {
-  min-height: 120px;
+  min-height: 100px;
   resize: vertical;
 }
 
-.checkbox-group {
-  display: flex;
-  align-items: center;
+.checkbox-wrapper {
+  margin-top: -10px;
 }
 
-.checkbox-group input {
-  width: auto;
-  margin-right: 10px;
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  font-size: 15px;
+  color: #444;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
 }
 
 .form-actions {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .submit-btn {
   background-color: #1bbc9b;
   color: white;
   border: none;
-  padding: 12px 30px;
+  padding: 12px 32px;
   border-radius: 6px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .submit-btn:hover {
   background-color: #17a689;
 }
 
-@media (max-width: 600px) {
-  .application-form {
-    padding: 20px;
+@media (max-width: 768px) {
+  .form-group {
+    flex: 1 1 100%;
+  }
+
+  .checkbox-label {
+    flex-wrap: wrap;
   }
 }
 </style>

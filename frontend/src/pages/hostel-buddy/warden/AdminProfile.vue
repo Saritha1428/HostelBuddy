@@ -129,10 +129,10 @@
         <span class="close" @click="showTwoFactorModal = false">&times;</span>
         <h2>Two-Factor Authentication</h2>
         <div class="two-factor-content">
-          <div class="qr-code">
+          <!-- <div class="qr-code">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=HostelBuddy2FA" alt="QR Code">
             <p>Scan this QR code with your authenticator app</p>
-          </div>
+          </div> -->
           <div class="verification-code">
             <p>Or enter this secret key manually:</p>
             <div class="secret-key">JBSWY3DPEHPK3PXP</div>

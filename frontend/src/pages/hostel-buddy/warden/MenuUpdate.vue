@@ -1,4 +1,5 @@
 <template>
+  <Navbar_warden/>
   <h2>Mess Menu Update</h2>
   <div class="main-wrapper">
     <!-- Left: Menu Cards -->
@@ -26,10 +27,17 @@
       <button class="submit-btn" @click="updateMenu">Submit</button>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_warden from '../../../components/Navbar_warden.vue';
+import Footer from '../../../components/Footer.vue';
+
 export default {
+  components:{
+   Navbar_warden,Footer
+  },
   data() {
     return {
       editingDay: "", // currently editing day

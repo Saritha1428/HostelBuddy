@@ -1,4 +1,5 @@
 <template>
+ 
   <div class="timeline">
     <h3>Status Progress</h3>
     <div class="steps">
@@ -22,9 +23,11 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
+
 export default {
   name: 'StatusTimeline',
   props: {

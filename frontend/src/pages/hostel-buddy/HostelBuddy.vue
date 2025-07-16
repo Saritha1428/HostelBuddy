@@ -7,8 +7,8 @@
           <h1>Smart Hostel Management System</h1>
           <p>Streamlining hostel operations for students and administrators</p><br/>
           <div class="auth-buttons">
-            <router-link to="/login" class="cta-button"> Sign In</router-link>
-            <router-link to="/register" class="cta-button outline">Sign Up</router-link>
+            <router-link to="/login" class="cta-button">Student Login</router-link>
+            <router-link to="/admin-login" class="cta-button outline">Warden Login</router-link>
           </div>
         </div>
       </section>
@@ -69,7 +69,7 @@
               </p>
             </div>
             <div class="feature-img">
-              <img src="@\assets\images\AnnouncementImg.png" alt="Announcements" />
+              <img src="@/assets/images/AnnouncementImg.png" alt="Announcements" />
             </div>
           </div>
 
@@ -192,9 +192,9 @@ export default {
   background-color: #1BBC9B;
   color: white;
   border: none;
-  padding: 12px 40px;
+  padding: 12px 30px;
   font-size: 1.2rem;
-  border-radius: 40px;
+  border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
@@ -217,7 +217,11 @@ export default {
   text-align: center;
   padding: 60px 20px 40px;
 }
-
+.hero-subline {
+  background: linear-gradient(to bottom, #dcf1f0, #ffffff);
+  text-align: center;
+  padding: 60px 20px 40px;
+}
 .subline-heading {
   font-size: 2.5rem;
   font-weight: 700;
@@ -241,7 +245,15 @@ export default {
   padding: 80px 20px;
   background-color: #fff;
 }
-
+/* Trapezium-like effect under features section */
+.features {
+  padding: 80px 20px;
+  background: linear-gradient(160deg, #ffffff 75%, #e9fefb 0%);
+  /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); */
+  /* Optional if you want more angled shape:
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+  */
+}
 .feature-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -319,6 +331,9 @@ export default {
   padding: 40px 20px;
   display: flex;
   justify-content: center;
+  background: linear-gradient(to top, #f0fdfc, #ffffff);
+  text-align: center;
+  padding: 60px 20px 40px;
 }
 
 .slideshow-wrapper {

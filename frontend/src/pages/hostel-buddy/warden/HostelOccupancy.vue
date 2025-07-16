@@ -1,6 +1,6 @@
 <template>
   <div class="hostel-occupancy-page">
-    <!-- <Navbar /> -->
+    <Navbar_warden />
     <main class="main-content">
       <div class="container">
         <!-- Page Header -->
@@ -200,16 +200,17 @@
       </div>
     </div>
   </div>
+ 
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
 import Footer from '@/components/Footer.vue'
+import Navbar_warden from '../../../components/Navbar_warden.vue'
 
 export default {
   name: 'HostelOccupancy',
   components: {
-    Navbar,
+    Navbar_warden,
     Footer
   },
   data() {

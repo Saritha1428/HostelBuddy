@@ -1,4 +1,5 @@
 <template>
+  <Navbar_warden/>
   <div class="leave-approval-container">
     <h2 class="approval-title">Leave Approval Requests</h2>
     <div class="leave-approval-content">
@@ -36,11 +37,18 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 
 <script>
+import Navbar_warden from '../../../components/Navbar_warden.vue';
+import Footer from '../../../components/Footer.vue';
+
 export default {
   name: 'LeaveApproval',
+  components :{
+    Navbar_warden,Footer
+  },
   data() {
     return {
       leaveRequests: [

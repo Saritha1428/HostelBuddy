@@ -1,5 +1,6 @@
 <template>
-  <div class="student-management">
+  <Navbar_warden/>
+ <div class="student-management">
     <h1 class="title">Student Management</h1>
 
     <div class="controls">
@@ -97,10 +98,16 @@
       </div>
     </div>
   </div>
+  <Footer/>
 </template>
 <script>
+import Navbar_warden from '../../../components/Navbar_warden.vue';
+import Footer from '../../../components/Footer.vue';
+
 export default {
-  data() {
+   components:{
+    Navbar_warden,Footer
+  },data() {
     return {
       searchQuery: '',
       filterStatus: '',
