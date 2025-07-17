@@ -1,5 +1,7 @@
 <template>
-  <Navbar_Student/>
+    <Navbar_Student/>
+  <div class="Theme">
+
   <div class="meal-cancellation-container">
     <h1>Meal Cancellation</h1>
     
@@ -185,6 +187,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
   <Footer/>
 </template>
@@ -752,6 +755,21 @@ h2 {
   margin-top: 20px;
   opacity: 0.7;
 }
+.Theme {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+padding: 3rem 2rem;
+  background: linear-gradient(to bottom, 
+    #e0f8f6 0%, 
+    #f0fdfc 30%, 
+    #ffffff 50%, 
+    #f0fdfc 70%, 
+    #e0f8f6 100%);
+ position: relative;
+  overflow: hidden;}
 
 /* Responsive adjustments */
 @media (max-width: 992px) {

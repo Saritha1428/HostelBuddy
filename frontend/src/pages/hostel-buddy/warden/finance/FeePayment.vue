@@ -1,4 +1,5 @@
 <template>
+  <Navbar_Student/>
   <div class="fee-payment-page">
     <Navbar_student />
     <main>
@@ -202,13 +203,13 @@
 
 <script>
 
-import Footer from '@/components/Footer.vue'
-import Navbar_student from '../../../../components/Navbar_student.vue'
+import Footer from '@/components/Footer.vue';
+import Navbar_Student from '../../../../components/Navbar_Student.vue';
 
 export default {
   name: 'FeePayment',
   components: {
-    Navbar_student,
+    Navbar_Student,
     Footer
   },
   data() {

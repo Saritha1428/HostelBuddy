@@ -7,8 +7,8 @@
           <h1>Smart Hostel Management System</h1>
           <p>Streamlining hostel operations for students and administrators</p><br/>
           <div class="auth-buttons">
-            <router-link to="/login" class="cta-button">Student Login</router-link>
-            <router-link to="/admin-login" class="cta-button outline">Warden Login</router-link>
+            <router-link to="/login" class="cta-button">Sign In</router-link>
+            <router-link to="/register" class="cta-button outline">Sign Up</router-link>
           </div>
         </div>
       </section>

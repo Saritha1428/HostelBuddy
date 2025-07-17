@@ -1,5 +1,7 @@
 <template>
-    <Navbar_Student/>
+   <Navbar_Student/>
+    <div class="request-container1">
+   
   <div class="request-container">
   
 
@@ -81,6 +83,8 @@
         </div>
       </div>
     </div>
+  </div>
+
   </div>
   <Footer/>
 </template>
@@ -263,6 +267,21 @@ textarea.form-input {
 .status-step.active .step-number {
   background: #1BBC9B;
 }
+.request-container1 {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+padding: 3rem 2rem;
+  background: linear-gradient(to bottom, 
+    #e0f8f6 0%, 
+    #f0fdfc 30%, 
+    #ffffff 50%, 
+    #f0fdfc 70%, 
+    #e0f8f6 100%);
+ position: relative;
+  overflow: hidden;}
 
 .step-content {
   padding-left: 20px;

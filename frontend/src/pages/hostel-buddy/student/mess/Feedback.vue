@@ -1,5 +1,6 @@
 <template>
   <Navbar_Student/>
+<div class="Theme">
   <div class="feedback-container">
     <div class="cards-wrapper">
       <!-- Left Card - Feedback Form -->
@@ -143,6 +144,7 @@
       </div>
     </div>
   </div>
+</div>
   <Footer/>
 </template>
 
@@ -416,6 +418,14 @@ export default {
   background: #15967D;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(27, 188, 155, 0.3);
+}
+.Theme { background: linear-gradient(to bottom, 
+    #e0f8f6 0%, 
+    #f0fdfc 30%, 
+    #ffffff 50%, 
+    #f0fdfc 70%, 
+    #e0f8f6 100%);
+
 }
 
 @media (max-width: 992px) {

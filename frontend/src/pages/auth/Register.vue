@@ -50,6 +50,7 @@ export default {
         ? 'Join our hostel community and enjoy seamless management.'
         : 'Register as warden to manage hostel operations.'
     }
+     
   },
   methods: {
     selectRole(role) {
@@ -247,4 +248,21 @@ input:focus {
     transform: translateX(0);
   }
 }
+.register-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+padding: 3rem 2rem;
+  background: linear-gradient(to bottom, 
+    #e0f8f6 0%, 
+    #f0fdfc 30%, 
+    #ffffff 50%, 
+    #f0fdfc 70%, 
+    #e0f8f6 100%);
+  position: relative;
+
+  position: relative;
+  overflow: hidden;}
 </style>

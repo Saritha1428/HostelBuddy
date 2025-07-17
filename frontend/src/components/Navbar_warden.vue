@@ -18,7 +18,6 @@
          <li class="nav-item">
           <router-link to="/warden-dashboard" class="nav-links">Dashboard</router-link>
         </li> 
-        
       </ul>
     </div>
   </nav>
@@ -42,13 +41,12 @@ export default {
 
 <style scoped>
 .navbar {
-  background-color: #fff;
+  background-color: #1BBC9B; /* Theme color background */
   height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.2rem;
-  position: sticky;
   top: 0;
   z-index: 999;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -62,21 +60,10 @@ export default {
   max-width: 1500px;
   padding: 0 24px;
 }
-/* Icon styling */
-.navbar-logo svg {
-  margin-right: 10px;
-  margin-left: 0px;
-  font-size: 1.2em;
-  color: inherit; 
-  transition: transform 0.3s ease;
-}
 
-.navbar-logo:hover svg {
-  transform: scale(1.1);
-  color: #16a085; 
-}
+/* Logo and icon styling - now white */
 .navbar-logo {
-  color: #1BBC9B;
+  color: white; /* Changed to white */
   justify-self: flex-start;
   cursor: pointer;
   font-size: 1.5rem;
@@ -84,6 +71,19 @@ export default {
   align-items: center;
   font-weight: bold;
   text-decoration: none;
+}
+
+.navbar-logo svg {
+  margin-right: 10px;
+  margin-left: 0px;
+  font-size: 1.2em;
+  color: inherit; /* Inherits white color */
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover svg {
+  transform: scale(1.1);
+  color: #e0f8f3; /* Lighter shade for hover */
 }
 
 .menu-toggle {
@@ -102,8 +102,9 @@ export default {
   height: 80px;
 }
 
+/* Navigation links - now white */
 .nav-links {
-  color: #333;
+  color: white; /* Changed to white */
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -113,14 +114,15 @@ export default {
 }
 
 .nav-links:hover {
-  color: #1BBC9B;
+  color: #e0f8f3; /* Lighter shade for hover */
 }
 
 .nav-links.router-link-exact-active {
-  color: #1BBC9B;
-  border-bottom: 3px solid #1BBC9B;
+  color: white;
+  border-bottom: 3px solid white; /* White underline for active link */
 }
 
+/* Mobile menu styles */
 @media screen and (max-width: 768px) {
   .menu-toggle {
     display: block;
@@ -137,7 +139,7 @@ export default {
     width: 25px;
     height: 3px;
     margin: 5px auto;
-    background-color: #333;
+    background-color: white; /* White bars for mobile menu */
     transition: all 0.3s ease-in-out;
   }
 
@@ -158,7 +160,7 @@ export default {
     left: -100%;
     top: 80px;
     flex-direction: column;
-    background-color: #fff;
+    background-color: #1BBC9B; /* Same theme color for mobile menu */
     width: 100%;
     height: calc(100vh - 80px);
     transition: all 0.5s ease;
@@ -179,16 +181,17 @@ export default {
     padding: 2rem;
     width: 100%;
     display: table;
+    color: white; /* Ensure white text in mobile menu */
   }
 
   .nav-links:hover {
-    background-color: #f5f5f5;
-    color: #1BBC9B;
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle white overlay for hover */
+    color: white;
   }
 
   .nav-links.router-link-exact-active {
     border-bottom: none;
-    background-color: #f5f5f5;
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly stronger overlay for active */
   }
 }
 </style>

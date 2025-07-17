@@ -157,7 +157,7 @@ export default {
 .publish-btn {
   background: #fff;
   color: #1BBC9B;
-  border: 2px solid #fff;
+  border: 2px solid #1BBC9B;
   padding: 0.6rem 1.2rem;
   font-size: 0.95rem;
   border-radius: 30px;
@@ -185,8 +185,8 @@ export default {
 .announcements-header {
   text-align: center;
   padding: 2rem 1rem;
-  background: linear-gradient(135deg, #1BBC9B, #16a085);
-  color: white;
+  background: white;
+  color: #1BBC9B;
 }
 
 .announcements-header h1 {

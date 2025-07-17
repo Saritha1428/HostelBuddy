@@ -1,5 +1,6 @@
 <template>
-   <Navbar_student/>
+   <Navbar_Student/>
+   <div class="Theme">
   <div class="student-profile">
    
     <main>
@@ -71,19 +72,19 @@
       </div>
       
     </main>
-    
+    </div>
   </div>
   <Footer/>
 </template>
 
 <script>
-import Navbar_student from '../../../../components/Navbar_student.vue';
+import Navbar_Student from '../../../../components/Navbar_Student.vue';
 import Footer from '@/components/Footer.vue';
 
 export default {
   name: 'StudentProfile',
     components: {
-    Navbar_student,
+    Navbar_Student,
     Footer
   },
   data() {
@@ -315,6 +316,14 @@ export default {
 }
 .detail-item textarea {
   min-height: 100px;
+}
+.Theme { background: linear-gradient(to bottom, 
+    #e0f8f6 0%, 
+    #f0fdfc 30%, 
+    #ffffff 50%, 
+    #f0fdfc 70%, 
+    #e0f8f6 100%);
+
 }
 
 @media (max-width: 768px) {

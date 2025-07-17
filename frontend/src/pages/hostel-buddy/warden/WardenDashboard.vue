@@ -266,33 +266,30 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: #f9fafb;
+ 
 }
 
-/* Fixed Header Styles */
-.dashboard-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+
+  .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   background: linear-gradient(135deg, #1BBC9B, #16a085);
   color: white;
-  z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+   height:100px;
 }
 
 .dashboard-header h1 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
+
 
 /* Scrollable Content Area */
 .dashboard-content {
   flex: 1;
-  margin-top: 70px; /* Height of header */
+  margin-top: 0px; /* Height of header */
   margin-bottom: 60px; /* Height of footer */
   padding: 1.5rem;
   overflow-y: auto;
