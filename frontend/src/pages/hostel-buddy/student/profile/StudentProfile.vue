@@ -1,135 +1,199 @@
 <template>
-   <Navbar_Student/>
-   <div class="Theme">
-  <div class="student-profile">
-   
-    <main>
-      <div class="profile-container">
-    
-        <!-- Profile Header -->
-        <div class="profile-header">
-          <div class="avatar-container">
-            <img :src="profile.imageUrl || defaultProfilePic" alt="Profile Picture" class="avatar">
-            <button @click="triggerFileInput" class="avatar-edit-btn">
-              <i class="fas fa-camera"></i>
-            </button>
-            <input type="file" ref="fileInput" @change="handleImageUpload" accept="image/*" style="display: none" />
-          </div>
-          <div class="profile-info">
-            <div v-if="editMode">
-              <input type="text" v-model="profile.name" class="edit-name-input" />
-            </div>
-            <div v-else>
-              <h1>{{ profile.name }}</h1>
-            </div>
-            <p class="role">Student</p>
-          </div>
-          <button @click="toggleEditMode" class="edit-profile-btn">
-            {{ editMode ? 'Cancel' : 'Edit Profile' }}
-          </button>
-        </div>
+  <Navbar_Student/>
+  <div class="Theme">
+      <div class="student-profile">
+          <main>
+              <div class="profile-container">
+                  
+                  <div class="profile-header">
+                      <div class="avatar-container">
+                          <img :src="profile.imageUrl || defaultProfilePic" alt="Profile Picture" class="avatar">
+                          <button @click="triggerFileInput" class="avatar-edit-btn">
+                              <i class="fas fa-camera"></i>
+                          </button>
+                          <input type="file" ref="fileInput" @change="handleImageUpload" accept="image/*" style="display: none" />
+                      </div>
+                      
+                      <div class="profile-info">
+                          <h1 v-if="loading">Loading...</h1>
+                          <h1 v-else>{{ profile.user.username || 'User Profile' }}</h1> 
+                          <p class="role">Student</p>
+                      </div>
+                      
+                      <button @click="toggleEditMode" class="edit-profile-btn">
+                          {{ editMode ? 'Cancel' : 'Edit Profile' }}
+                      </button>
+                  </div>
 
-        <!-- Profile Content -->
-        <div class="profile-content">
-          <div class="profile-section">
-            <div class="section-header">
-              <h2><i class="fas fa-user-circle"></i> Personal Details</h2>
-              <button v-if="editMode" @click="saveProfile" class="save-btn">Save Changes</button>
-            </div>
+                  <div class="profile-content">
+                      <div class="profile-section">
+                          <div class="section-header">
+                              <h2><i class="fas fa-user-circle"></i> Personal Details</h2>
+                              <button v-if="editMode" @click="saveProfile" class="save-btn">Save Changes</button>
+                          </div>
 
-            <div class="details-grid">
-              <div class="detail-item">
-                <label>Date of Birth</label>
-                <input v-if="editMode" v-model="profile.dob" type="date">
-                <p v-else>{{ profile.dob }}</p>
+                          <div class="details-grid">
+                              
+                              <div class="detail-item">
+                                  <label>Email (From Registration)</label>
+                                  <p v-if="loading">Loading...</p>
+                                  <p v-else>{{ profile.user.email || 'N/A' }}</p> 
+                              </div>
+                              
+                              <div class="detail-item">
+                                  <label>Student ID</label>
+                                  <input v-if="editMode" v-model="profile.studentId" type="text">
+                                  <p v-else-if="loading">Loading...</p>
+                                  <p v-else>{{ profile.studentId || 'N/A' }}</p>
+                              </div>
+                              
+                              <div class="detail-item">
+                                  <label>Department</label>
+                                  <input v-if="editMode" v-model="profile.department" type="text">
+                                  <p v-else-if="loading">Loading...</p>
+                                  <p v-else>{{ profile.department || 'N/A' }}</p>
+                              </div>
+
+                              <div class="detail-item">
+                                  <label>Phone</label>
+                                  <input v-if="editMode" v-model="profile.phone" type="tel">
+                                  <p v-else-if="loading">Loading...</p>
+                                  <p v-else>{{ profile.phone || 'N/A' }}</p>
+                              </div>
+                              
+                          </div>
+                      </div>
+                      <div class="back-nav">
+                          <button @click="goToDashboard" class="back-link">
+                              ← Back to Dashboard
+                          </button>
+                      </div>
+                  </div>
               </div>
-
-              <div class="detail-item">
-                <label>Email</label>
-                <input v-if="editMode" v-model="profile.email" type="email">
-                <p v-else>{{ profile.email }}</p>
-              </div>
-
-              <div class="detail-item">
-                <label>Phone</label>
-                <input v-if="editMode" v-model="profile.phone" type="tel">
-                <p v-else>{{ profile.phone }}</p>
-              </div>
-
-              <div class="detail-item">
-                <label>Address</label>
-                <textarea v-if="editMode" v-model="profile.address"></textarea>
-                <p v-else>{{ profile.address }}</p>
-              </div>
-            </div>
-          </div>
-           <div class="back-nav">
-          <button @click="goToDashboard" class="back-link">
-            ← Back to Dashboard
-          </button>
-        </div>
-        </div>
+          </main>
       </div>
-      
-    </main>
-    </div>
   </div>
   <Footer/>
 </template>
-
 <script>
 import Navbar_Student from '../../../../components/Navbar_Student.vue';
 import Footer from '@/components/Footer.vue';
+import axios from 'axios'; 
 
 export default {
-  name: 'StudentProfile',
+    name: 'StudentProfile',
     components: {
-    Navbar_Student,
-    Footer
-  },
-  data() {
-    return {
-      editMode: false,
-      defaultProfilePic: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
-      profile: {
-        name: 'John Doe',
-        dob: '2000-05-15',
-        email: 'john.doe@university.edu',
-        phone: '+1 (555) 123-4567',
-        address: '123 Hostel Lane, Room 204\nUniversity Campus\nCity, State 12345',
-        imageUrl: ''
-      },
-      originalProfile: {}
-    };
-  },
-  methods: {
-    toggleEditMode() {
-      if (!this.editMode) {
-        this.originalProfile = JSON.parse(JSON.stringify(this.profile));
-      }
-      this.editMode = !this.editMode;
+        Navbar_Student,
+        Footer
     },
-    saveProfile() {
-      console.log('Profile saved:', this.profile);
-      this.editMode = false;
-      alert('Profile updated successfully!');
+    data() {
+        return {
+            editMode: false,
+            loading: true, // Manages the loading state in the template
+            defaultProfilePic: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png',
+            profile: {
+                // CRITICAL FIX: Initialize nested object and all fields to avoid "Cannot read properties of null"
+                user: { username: null, email: null }, 
+                studentId: null,
+                department: null,
+                phone: null, 
+                imageUrl: null
+            },
+            originalProfile: {}
+        };
     },
-    triggerFileInput() {
-      this.$refs.fileInput.click();
+    created() {
+        this.fetchProfileData();
     },
-    handleImageUpload(event) {
-      const file = event.target.files[0];
-      if (file) {
-        this.profile.imageUrl = URL.createObjectURL(file);
-      }
-    },
-    goToDashboard() {
-      this.$router.push({ name: 'StudentDashboard' });
+
+    methods: {
+        async fetchProfileData() {
+            const token = localStorage.getItem('token');
+            if (!token) { 
+                this.$router.push({ name: 'Login' });
+                return;
+            }
+            this.loading = true;
+
+            try {
+                const response = await axios.get('http://localhost:3000/api/student/profile', {
+                    headers: { 'x-auth-token': token }
+                });
+
+                const apiData = response.data;
+
+                // Map backend data to frontend state
+                this.profile = {
+                    ...apiData,
+                    phone: apiData.contactNumber, // Map backend 'contactNumber' to frontend 'phone'
+                    user: apiData.user // Keep the populated user data
+                };
+                
+            } catch (error) {
+                if (error.response && error.response.status === 404) {
+                    // This means the profile record hasn't been created yet.
+                    // We must fetch the basic user data from the token or an existing store
+                    console.log('Profile not yet created. Using token data...');
+                } else {
+                    console.error('Failed to fetch profile:', error);
+                }
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async saveProfile() {
+            const token = localStorage.getItem('token');
+            if (!token) return;
+
+            const dataToSave = {
+                studentId: this.profile.studentId,
+                department: this.profile.department,
+                phone: this.profile.phone, // Send phone number as 'phone'
+                // Add emergencyContact if you have it in your form
+            };
+
+            try {
+                await axios.post('http://localhost:3000/api/student/profile', dataToSave, {
+                    headers: { 'x-auth-token': token }
+                });
+
+                alert('Profile updated successfully!');
+
+                // CRITICAL: Refresh the displayed data
+                await this.fetchProfileData(); 
+                
+                this.editMode = false;
+
+            } catch (error) {
+                console.error('Error saving profile:', error.response ? error.response.data : error.message);
+                alert('Failed to save profile. Check console for details.');
+            }
+        },
+        
+        toggleEditMode() {
+            if (!this.editMode) {
+                this.originalProfile = JSON.parse(JSON.stringify(this.profile));
+            } else {
+                this.profile = JSON.parse(JSON.stringify(this.originalProfile));
+            }
+            this.editMode = !this.editMode;
+        },
+        triggerFileInput() {
+            this.$refs.fileInput.click();
+        },
+        handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                this.profile.imageUrl = URL.createObjectURL(file);
+            }
+        },
+        goToDashboard() {
+            this.$router.push({ name: 'StudentDashboard' });
+        }
     }
-  }
 };
 </script>
-
 <style scoped>
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 

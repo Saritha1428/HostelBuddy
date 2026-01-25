@@ -15,11 +15,14 @@
             <input type="email" placeholder="Email" v-model="email" required />
             <input type="password" placeholder="Password" v-model="password" required />
             <input type="password" placeholder="Confirm Password" v-model="confirmPassword" required />
+            <input type="text" placeholder="Phone Number" v-model="phonenumber" required />
+            <input type="text" placeholder="Student ID" v-model="studentId" required />
+            <input type="text" placeholder="Department" v-model="department" required />
             
-            <!-- <div class="role-selection">
-              <button :class="{ active: role === 'Student' }" @click="selectRole('Student')">Student</button>
-              <button :class="{ active: role === 'Warden' }" @click="selectRole('Warden')">Warden</button>
-            </div> -->
+            <div class="role-selection">
+              <button :class="{ active: role === 'student' }" @click.prevent="selectRole('student')">Student</button>
+              <button :class="{ active: role === 'warden' }" @click.prevent="selectRole('warden')">Warden</button>
+            </div> 
             
             <button type="submit" class="btn">Sign Up</button>
           </form>
@@ -30,63 +33,101 @@
 </template>
 
 <script>
-export default {
-  name: 'Register',
-  data() {
-    return {
-      fullName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      role: 'Student'
-    }
-  },
-  computed: {
-    welcomeTitle() {
-      return this.role === 'Student' ? 'Welcome New Student!' : 'Warden Registration'
+  import axios from 'axios';
+  
+  export default {
+    name: 'Register',
+    data() {
+      return {
+        fullName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        phonenumber: '',
+        studentId: '',
+        department: '',
+        role: 'student'
+      }
     },
-    welcomeText() {
-      return this.role === 'Student'
-        ? 'Join our hostel community and enjoy seamless management.'
-        : 'Register as warden to manage hostel operations.'
-    }
+    computed: {
+      welcomeTitle() {
+        return this.role === 'student' ? 'Welcome New Student!' : 'Warden Registration'
+      },
+      welcomeText() {
+        return this.role === 'student'
+          ? 'Join our hostel community and enjoy seamless management.'
+          : 'Register as warden to manage hostel operations.'
+      }
+    },
+    methods: {
+      selectRole(role) {
+        this.role = role
+      },
+      
      
-  },
-  methods: {
-    selectRole(role) {
-      this.role = role
-    },
-    
-    async handleRegister() {
-      if (this.password !== this.confirmPassword) {
-        alert('Passwords do not match!')
-        return
-      }
+        // 1. Prepare Authentication Data (Registration)
+       
+  
+        
+  
+          // --- STEP 2: CREATE PROFILE LINK (IF STUDENT) ---
+          
+  
+           
+            
+  
+          
+  
+          async handleRegister() {
+  if (this.password !== this.confirmPassword) {
+    alert("Passwords do not match!");
+    return;
+  }
 
-      try {
-        const userData = {
-          fullName: this.fullName,
-          email: this.email,
-          password: this.password,
-          role: this.role
-        }
-        
-        console.log('Registering user:', userData)
-        localStorage.setItem('user', JSON.stringify(userData))
-        
-        this.$router.push(this.role === 'Student' ? '/student-dashboard' : '/warden-dashboard')
-      } catch (error) {
-        alert(`Registration failed: ${error.message}`)
-      }
-    },
+  // 1. Data for the Authentication account
+  const authData = {
+    username: this.fullName,
+    email: this.email,
+    password: this.password,
+    role: this.role
+  };
+
+  try {
+    // STEP 1: Create the Auth Account
+    const authRes = await axios.post('http://localhost:3000/api/auth/register', authData);
+    const token = authRes.data.token;
     
-    goToLogin() {
-      this.$router.push('/login')
+    localStorage.setItem('token', token);
+    localStorage.setItem('user', JSON.stringify({
+      username: authRes.data.username,
+      role: authRes.data.role
+    }));
+
+    // STEP 2: Create the linked Student Profile immediately
+    if (this.role === 'student') {
+      const profileData = {
+        studentId: this.studentId,
+        department: this.department,
+        phone: this.phonenumber // This must match your backend's expected key
+      };
+
+      await axios.post('http://localhost:3000/api/student/profile', profileData, {
+        headers: { 'x-auth-token': token }
+      });
     }
+
+    alert('Registration Successful!');
+    this.$router.push(this.role === 'student' ? '/student-dashboard' : '/warden-dashboard');
+
+  } catch (error) {
+    console.error('Registration Error:', error);
+    const msg = error.response?.data?.msg || "Registration failed. Try a unique email.";
+    alert(msg);
   }
 }
-</script>
-
+    }
+  }
+  </script>
 <style scoped>
 .register-wrapper {
   height: 100vh;
