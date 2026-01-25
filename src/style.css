@@ -1,0 +1,24 @@
+/* 
+body {
+  font-family: Arial, sans-serif;
+  background: #f8f9fa;
+  padding: 20px;
+}
+input, textarea, select, button {
+  display: block;
+  margin-bottom: 10px;
+  padding: 8px;
+  width: 100%;
+  max-width: 500px;
+}
+button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+}
+.preview {
+  border: 1px solid #ccc;
+  background: white;
+  padding: 10px;
+  margin-top: 10px;
+} */
